@@ -319,10 +319,9 @@ EOT;
 	foreach($inputs as $input)
 	{
 		$template = array_pop($input);
-
 		if($template != 'radio')
 		{
-			$form .= execute_template('core', $template, $input);
+			$form .= $_ARCHON->PublicInterface->executeTemplate('core', $template, $input);
 		}
 		else
 		{
@@ -338,20 +337,6 @@ EOT;
 	echo("</form>");
     require_once("footer.inc.php");
 }
-
-function execute_template($package, $template, $vars)
-{
-	global $_ARCHON;
-	extract($vars, EXTR_SKIP);
-
-	ob_start();
-	eval($_ARCHON->PublicInterface->Templates[$package][$template]);
-	$result = ob_get_contents();
-	ob_end_clean();
-
-	return $result;
-}
-
 
 function register_exec()
 {

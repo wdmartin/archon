@@ -126,6 +126,28 @@ pageTracker._trackPageview();
         $this->Templates = $_ARCHON->loadTemplates($this->TemplateSet);
     }
 
+   /**
+    * Executes a template.
+    *
+    * @param string $package Package whose template set contains the template file.
+    * @param string $template The name of the template, as registered in the template directory's index.php.
+    * @param array $vars An associative array of variable names, which will be extracted and supplied to the template for printout.
+    */
+	public function executeTemplate($package, $template, $vars)
+	{
+		global $_ARCHON;
+		extract($vars, EXTR_SKIP);
+
+		ob_start();
+		eval($this->Templates[$package][$template]);
+		$result = ob_get_contents();
+		ob_end_clean();
+
+		return $result;
+	}
+
+
+
     /**
      * Indicates if toString and getString functions should escape values before returning their string
      *
