@@ -261,7 +261,7 @@ EOT;
 					'strInputLabel' => "<label for=\"$id\">$strUserProfileField:</label>",
 					'strInputElement' => "<textarea id=\"$id\" name=\"UserProfileFields[$fieldName][Value]\" rows=\"$size\" cols=\"50\">$value</textarea>",
 					'strRequired' => $required,
-					'template' => 'FieldGeneral',
+					'template' => 'FieldTextArea',
 				);
             }
 

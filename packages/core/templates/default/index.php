@@ -8,6 +8,7 @@ $TemplateIndex['EditProfile'] = 'edit-profile.inc.php';
 // Form sub-templates
 $TemplateIndex['FieldCategory'] = 'field-category.inc.php'; // Displays section headings within a form
 $TemplateIndex['FieldGeneral'] = 'field-general.inc.php'; // Displays most form inputs (text input, select, etc)
+$TemplateIndex['FieldTextArea'] = 'field-textarea.inc.php'; // Displays most form inputs (text input, select, etc)
 
 
 ?>
