@@ -3,6 +3,7 @@ $TemplateIndex['Privacy'] = 'privacy.inc.php';
 $TemplateIndex['Email'] = 'email.inc.php';
 $TemplateIndex['Register'] = 'register.inc.php';
 $TemplateIndex['Login'] = 'login.inc.php';
+$TemplateIndex['EditProfile'] = 'edit-profile.inc.php';
 
 // Form sub-templates
 $TemplateIndex['FieldCategory'] = 'field-category.inc.php'; // Displays section headings within a form

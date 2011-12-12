@@ -230,7 +230,7 @@ EOT;
                     {
                     	if(!property_exists($obj, 'CountryID') || !isset($obj->CountryID) || $obj->CountryID == $_REQUEST['countryid'])
                     	{
-                            $selected = ($value == $obj->ID) ? ' selected' : '';
+                            $selected = ($value == $obj->ID) ? ' selected="selected"' : '';
                             $strInput .= "        <option value=\"$obj->ID\"$selected>" . $obj->toString() . "</option>";
                     	}
                     }
