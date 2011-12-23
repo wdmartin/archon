@@ -159,7 +159,7 @@ abstract class Accessions_AccessionLocationEntry
         if(isset($this->Extent))
         {
             $String .= $Delimiter;
-            $String .= $this->getString('Extent') . ($this->ExtentUnit ? ' ' . $this->ExtentUnit->getString('ExtentUnit') : '');
+            $String .= $this->getString('Extent') . ($this->ExtentUnit ? ' ' . $this->ExtentUnit->toString() : '');
         }
         else if($AlwaysDelimit)
         {
