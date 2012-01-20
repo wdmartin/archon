@@ -3512,7 +3512,7 @@ abstract class Core_Archon
             {
                top.frames['message'].location.href='?p=admin/core/index&f=message&msg=' + msg;
             }
-            elseif(parent.window.opener && parent.window.opener.top.frames['message'])
+            else if(parent.window.opener && parent.window.opener.top.frames['message'])
             {
                parent.window.opener.top.frames['message'].location.href='?p=admin/core/index&f=message&msg=' + msg;
             }
