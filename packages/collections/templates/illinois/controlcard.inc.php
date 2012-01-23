@@ -536,19 +536,19 @@ if(!empty($objCollection->Languages))  //show only non-english
             <?php
          }
          
-          if (!empty($objCollection->AccessRestrictions))
-			{
-		    ?>
-					<div class='ccardcontent' style="padding-left:.2em" id="AccessRestrictResults"><span class='ccardlabel'>Access Restriction:</span> <?php echo($objCollection->getString('AccessRestrictions')); ?></div>
-		     <?php	
-			}
-		 				 if (!empty($objCollection->UseRestrictions))
-			{
-		    ?>
-					<div class='ccardcontent' style="padding-left:.2em" id="AccessRestrictResults"><span class='ccardlabel'>Rights/Use Restriction:</span> <?php echo($objCollection->getString('UseRestrictions')); ?></div>
-		     <?php	
-			}
-         
+        if (!empty($objCollection->AccessRestrictions))
+				{
+				   ?>
+							<div class='ccardcontent expandablesmall' style="padding-left:.2em" id="AccessRestrictResults"><span class='ccardlabel'>Access Restriction:</span> <?php echo($objCollection->getString('AccessRestrictions')); ?></div>
+				    <?php	
+				}
+				if (!empty($objCollection->UseRestrictions))
+				{
+				    ?>
+							<div class='ccardcontent expandablesmall' style="padding-left:.2em" id="UseRestrictResults"><span class='ccardlabel'>Rights Statement:</span> <?php echo($objCollection->getString('UseRestrictions')); ?></div>
+				    <?php	
+				}
+        
          if($objCollection->DigitalContent || $containsImages)
          {
             ?>
