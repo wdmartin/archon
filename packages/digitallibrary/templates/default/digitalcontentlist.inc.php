@@ -23,11 +23,5 @@
  * @author Chris Rishel
  */
 isset($_ARCHON) or die();
-
-echo("<div class='listitem'>" . $objDigitalContent->toString(LINK_TOTAL));
-if($objDigitalContent->Date)
-{
-echo(", ". $objDigitalContent->getString('Date'));
-}
-echo("</div>\n");
 ?>
+<div class="listitem"><?php echo($item); echo($date); ?></div>
