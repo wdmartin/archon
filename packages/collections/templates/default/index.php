@@ -12,4 +12,5 @@ $TemplateIndex['BookCard'] = "bookcard.inc.php";
 $TemplateIndex['Cart'] = "cart.inc.php";
 $TemplateIndex['Verify'] = "verify.inc.php";
 $TemplateIndex['Email'] = "email.inc.php";
+$TemplateIndex['Marc'] = "marc.inc.php";
 ?>
