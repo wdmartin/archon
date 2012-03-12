@@ -247,6 +247,9 @@ if($objCollection->AccessRestrictions)
     $fields['506']->SubFields['a'] = $objCollection->AccessRestrictions;
 }
 
+if($objCollection->PreferredCitation){
+    $fields['524']->SubFields['a'] = $objCollection->PreferredCitation;
+}
 
 if($objCollection->Scope)
 {
