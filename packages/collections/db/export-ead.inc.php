@@ -239,7 +239,7 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
 
 
    $filesize = filesize($tmp_zip);
-   header("Content-Length: $filesize");
+   // header("Content-Length: $filesize");
 
    // deliver the zip file
    $fp = fopen("$tmp_zip","r");

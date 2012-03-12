@@ -133,13 +133,12 @@ header('Content-type: text/html; charset=UTF-8');
       {
          $message = $_ARCHON->PublicInterface->Header->Message;
       }
+      $_ARCHON->PublicInterface->outputGoogleAnalyticsCode();
       ?>
    </head>
    <body>
       <?php
-      $_ARCHON->PublicInterface->outputGoogleAnalyticsCode();
-
-
+     
       if($message)
       {
          echo("<div class='message'>" . encode($message, ENCODE_HTML) . "</div>\n");
