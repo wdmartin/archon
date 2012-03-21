@@ -1098,6 +1098,10 @@ abstract class Collections_Collection
          $this->ExtentUnit = New ExtentUnit($this->ExtentUnitID);
          $this->ExtentUnit->dbLoad();
       }
+      else
+      {
+         $this->ExtentUnit = New ExtentUnit($this->ExtentUnitID);
+      }
 
       if($this->MaterialTypeID)
       {
