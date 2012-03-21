@@ -2465,8 +2465,32 @@ abstract class Core_Archon
       }
 
       $this->Security = New Security();
+          
+      if(defined('PACKAGE_COLLECTIONS'))
+      {
+         if($this->Security->Session->ResearchCart)
+         {
+            if($this->Security->isAuthenticated() && $this->Security->userHasAdministrativeAccess() == false)
+            {                
+                $arrImplodedEntries = explode(',', $this->Security->Session->getRemoteVariable('Cart'));
 
-
+                if(!empty($arrImplodedEntries))
+                {
+                    foreach($arrImplodedEntries as $strIDs)
+                    {
+                        if($strIDs)
+                        {
+                            list($CollectionID, $CollectionContentID) = explode(':', $strIDs);                            
+                            $this->Security->Session->User->dbAddToCart($CollectionID, $CollectionContentID);
+                        }
+                    }
+                }
+                
+                $this->Security->Session->unsetRemoteVariable('Cart', true);
+            }
+         }
+      }
+   
       if(isset($_REQUEST['unsetadmintheme']))
       {
          $this->Security->Session->unsetRemoteVariable('AdminTheme');
@@ -2659,7 +2683,7 @@ abstract class Core_Archon
          eval("\$result = {$MixinClass}::initialize();");
       }
    }
-
+   
    /**
     * Loads argument object with information from the database
     *
