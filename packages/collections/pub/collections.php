@@ -193,7 +193,7 @@ function collections_listAllCollections($Page, $ShowBooks)
       header("Location: $paginationURL");
    }
 
-   
+
 
    $objViewAllPhrase = Phrase::getPhrase('viewall', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
    $strViewAll = $objViewAllPhrase ? $objViewAllPhrase->getPhraseValue(ENCODE_HTML) : 'View All';

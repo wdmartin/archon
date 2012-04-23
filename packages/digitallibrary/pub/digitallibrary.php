@@ -101,7 +101,6 @@ function digitallibrary_main()
 
 	$content .= <<<EOT
    </div>
-</div>
    <form action="index.php" accept-charset="UTF-8" method="get" onsubmit="if(!this.q.value) { alert('$strPleaseEnter'); return false; } else { return true; }">
       <div id="dlsearchblock" style="text-align: center">
          <input type="hidden" name="p" value="digitallibrary/thumbnails" />
