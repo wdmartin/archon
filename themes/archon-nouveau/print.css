@@ -1,0 +1,8 @@
+header nav { display: none; }
+
+header img {
+	height: 35px;
+	width: auto;
+}
+
+body { background: #FFF url("non-existent.png") !important; }

@@ -1,0 +1,89 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	min-height: 99%;
+	font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+	font-size: 17px;
+	line-height: 1.4;
+	background: #0A5D49 url("bg.png");
+}
+
+#main {
+	margin: 0 auto;
+	width: 90%;
+	max-width: 966px;
+	min-width: 746px;
+	height: 100%;
+	background: 	url("pillar-nouveau-top-right.png") top right no-repeat,
+						url("pillar-nouveau-top-left.png") top left no-repeat,
+						url("pillar-nouveau-bottom-right.png") bottom right no-repeat,
+						url("pillar-nouveau-bottom-left.png") bottom left no-repeat,
+						url("pillar-nouveau-side-right.png") top right repeat-y,
+						url("pillar-nouveau-side-left.png") top left repeat-y,
+						url("swirl-marble-blue.jpg") top left;
+	border-top: 4px solid #070E19;
+	border-bottom: 4px solid #070E19;
+	padding: 0 17px;
+}
+
+header {
+	padding: 24px 15px;
+}
+
+header nav ul {
+	list-style: none;
+	margin: 24px 0 0 0;
+	padding: 0;
+}
+
+header nav li {
+	display: inline-block;
+	width: 15%;
+}
+
+a { text-decoration: none; }
+a:link, a:visited { color: #2C5093; }
+a:hover, a:active { color: #FF752B; }
+
+header nav a { font-size: 20px; }
+
+
+header .last {
+	width: 37.5%;
+	text-align: right;
+}
+
+.visually-hidden {
+	position: absolute;
+	left: -999em;
+}
+
+section, footer {
+	padding: 0 15px 24px 15px;
+	border-top: 1px solid #999999;
+}
+
+section {
+	background: #FFF url("laurel-large.jpg") bottom center no-repeat;
+}
+
+
+
+
+footer {
+	padding: 24px 15px;
+}
+
+h2 {
+	font-size: 24px;
+	color: #2C5093;
+}
+
+blockquote {
+	font-style: italic;
+	white-space: pre;
+}
+
+nav .active {
+	
+}
