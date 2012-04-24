@@ -32,22 +32,30 @@ header {
 
 header nav ul, #utility-nav {
 	list-style: none;
-	margin: 24px 0 0 0;
+	margin: 21px 0 0 0;
 	padding: 0;
 	overflow: hidden;
 }
 
 header nav li {
 	float: left;
-	margin-right: 2em;
+	margin-right: 16px;
+	padding-top: 3px;
+	padding-left: 18px;
 }
 
 header nav li.first {
 	float: right;
+	margin: 0;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+header nav li.last{
 	margin-right: 0;
 }
 
-#utility-nav { float: right; font-size: 15px; }
+#utility-nav { float: right; font-size: 15px; margin-top: 19px; }
 
 #utility-nav li {
 	display: inline;
@@ -107,7 +115,7 @@ blockquote {
 }
 
 nav .active {
-	
+	background: url("images/leaf.png") top left no-repeat;
 }
 
 .ccardcontent { margin-top: 1em; }
