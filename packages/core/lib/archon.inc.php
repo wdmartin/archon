@@ -2437,13 +2437,6 @@ abstract class Core_Archon
       $this->RootDirectory = getcwd();
 
       $this->Packages = $this->getAllPackages();
-//
-//      if($this->Packages['core']->DBVersion <= '2.23' && !$_POST['upgrader'])
-//      {
-//         echo($this->Packages['core']->DBVersion);
-////         header("Location: index.php?p=upgrade");
-//         die($this->Packages['core']->DBVersion);
-//      }
 
       $this->initPackages();
       $this->initModules();
@@ -2490,7 +2483,7 @@ abstract class Core_Archon
             }
          }
       }
-   
+
       if(isset($_REQUEST['unsetadmintheme']))
       {
          $this->Security->Session->unsetRemoteVariable('AdminTheme');
