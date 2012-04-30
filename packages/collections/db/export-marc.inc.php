@@ -59,7 +59,8 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
       $filename = formatFileName($objCollection->getString('SortTitle',0,false,false));
 
       $handle = fopen($dirname."/".$filename.".mrc", "w");
-
+      
+      $objCollection->dbLoad();
       $objCollection->dbLoadRelatedObjects();
 
       ob_start();
@@ -373,6 +374,8 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
                   $objMARCRecord->append_fields($field);
                }
             }
+            
+            array_shift($fields);
          }
       }
 

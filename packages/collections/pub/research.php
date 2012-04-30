@@ -500,6 +500,7 @@ function research_exec()
                foreach($arrCart->Collections as $CollectionID => $arrObjs)
                {
                   foreach($arrObjs->Content as $CollectionContentID => $obj)
+                  {
                      if($obj instanceof Collection)
                      {
                         $objCollection = $obj;
@@ -510,10 +511,11 @@ function research_exec()
                         $objCollection = $obj->Collection;
                         $objContent = $obj;
                      }
-                  if($objCollection->RepositoryID == $_REQUEST['repositoryid'])
-                  {
-                     $objAppointment->dbRelateMaterials($CollectionID, $CollectionContentID);
-                     $_ARCHON->Security->Session->ResearchCart->deleteFromCart($CollectionID, $CollectionContentID);
+                     if($objCollection->RepositoryID == $_REQUEST['repositoryid'])
+                     {
+                       $objAppointment->dbRelateMaterials($CollectionID, $CollectionContentID);
+                       $_ARCHON->Security->Session->ResearchCart->deleteFromCart($CollectionID, $CollectionContentID);
+                     }
                   }
                }
             }

@@ -4825,7 +4825,7 @@ abstract class Core_Archon
    /**
     * @var string
     */
-   public $ReleaseDate = '2012.3.12';
+   public $ReleaseDate = '2012.4.30';
    /**
     * @var string
     */
