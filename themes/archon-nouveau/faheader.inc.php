@@ -146,6 +146,170 @@ $onUnload = $_ARCHON->PublicInterface->Header->OnUnload;
 
 $search_value = encode($_ARCHON->QueryString, ENCODE_HTML);
 
+
+////////// Finding Aid Local Navigation //////////
+
+// Set the local nav title.
+$local_nav_title = $objCollection->getString('Title');
+
+// Build the array of links.
+$local_links = array(
+	array(
+		'text' => 'Overview',
+		'url' => '#',
+	),
+);
+
+if($objCollection->Abstract){
+	$local_links[] = array(
+		'text' => 'Abstract',
+		'url' => '#abstract',
+	);
+}
+
+if($objCollection->Scope){
+	$local_links[] = array(
+		'text' => 'Scope and Contents',
+		'url' => '#scopecontent',
+	);
+}
+
+if($objCollection->PrimaryCreator->BiogHist){
+	$type = trim($objCollection->PrimaryCreator->CreatorType);
+
+	$text = 'Biographical Note';
+
+	switch($type){
+		case 'Corporate Name':  $text = 'Historical Note';  break;
+		case 'Family Name':  $text = 'Family History';  break;
+	}
+
+	$local_links[] = array(
+		'text' => $text,
+		'url' => '#bioghist',
+	);
+}
+
+if(!empty($arrSubjects)){
+	$local_links[] = array(
+		'text' => 'Subject Terms',
+		'url' => '#subjects',
+	);
+}
+
+if(
+	!empty($objCollection->AccessRestrictions)		||
+	!empty($objCollection->UseRestrictions)			||
+	!empty($objCollection->PhysicalAccessNote)		||
+	!empty($objCollection->TechnicalAccessNote)		||
+	!empty($objCollection->AcquisitionSource)		||
+	!empty($objCollection->AcquisitionMethod)		||
+	!empty($objCollection->AppraisalInformation)	||
+	!empty($objCollection->CustodialHistory)		||
+	!empty($objCollection->OrigCopiesNote)			||
+	!empty($objCollection->OrigCopiesURL)			||
+	!empty($objCollection->RelatedMaterials)		||
+	!empty($objCollection->RelatedMaterialsURL)		||
+	!empty($objCollection->RelatedPublications)		||
+	!empty($objCollection->PreferredCitation)		||
+	!empty($objCollection->ProcessingInfo)			||
+	!empty($objCollection->RevisionHistory)
+){
+	$local_links[] = array(
+		'text' => 'Administrative Information',
+		'url' => '#admininfo',
+	);
+}
+
+if(!empty($objCollection->Content)){
+	$local_links[] = array(
+		'text' => 'Detailed Description',
+		'url' => '#boxfolder',
+	);
+}
+
+$objInfoRestrictedPhrase = Phrase::getPhrase('informationrestricted', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+$info_restricted = $objInfoRestrictedPhrase ? $objInfoRestrictedPhrase->getPhraseValue(ENCODE_HTML) : 'Restricted Information';
+$query = $_ARCHON->QueryStringURL;
+
+foreach($objCollection->Content as $ID => $objContent){
+
+	// Only process items that lack a parent ID.
+	if($objContent->ParentID){ continue; }
+
+	// Enabled items get a link
+	if($objContent->enabled()){
+
+		$collectionID = $objCollection->ID;
+
+		if(trim($objContent->Title)){
+
+			$local_links[] = array(
+				'text' => $objContent->getString('Title'),
+				'url' => "?p=collections/findingaid&amp;id=$collectionID&amp;q=$query&amp;rootcontentid=$ID#id$ID",
+				'properties' => array('class' => 'faitemcontent',),
+			);
+
+		} else {
+
+			$LevelContainer = $objContent->LevelContainer ? $objContent->LevelContainer->getString('LevelContainer') : '';
+			$local_links[] = array(
+				'text' => $LevelContainer .' '. $objContent->getString('LevelContainerIdentifier', 0, false),
+				'url' => "?p=collections/findingaid&amp;id=$collectionID&amp;q=$query&amp;rootcontentid=$ID#id$ID",
+				'properties' => array('class' => 'faitemcontent',),
+			);
+
+		}
+
+	} else {
+
+		// Disabled items just get a restriction notice.
+		$local_links[] = array(
+			'text' => $info_restricted,
+			'properties' => array('class' => 'faitemcontent restricted',),
+		);
+	}
+}
+
+// Build a finished list of links from the array.
+$local_nav = "<ul>\n";
+foreach($local_links as $l){
+	$text = $l['text'];
+	$url = isset($l['url'])? $l['url'] : false;
+	$properties = isset($l['properties'])? $l['properties'] : false;
+
+	$local_nav .= "\t\t<li";
+if($properties == 'B'){ var_dump($l); }
+	if($properties){
+		foreach($properties as $attribute => $value){
+			$local_nav .= " $attribute=\"$value\"";
+		}
+	}
+
+	$local_nav .= ">";
+
+	if($url){
+		$local_nav .= "<a href=\"$url\">$text</a>";
+	} else {
+		$local_nav .= $text;
+	}
+
+	$local_nav .= "</li>\n";
+	
+}
+
+$local_nav .= "</ul>\n";
+
+if(defined('PACKAGE_COLLECTIONS')){
+	$contact_url = "?p=collections/research&amp;f=email&amp;referer=" . urlencode($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+	$contact_link = "<a href=\"$contact_url\">Contact us about this collection</a>";
+}
+
+$collectionID = $objCollection->ID;
+$query = encode($_ARCHON->QueryString, ENCODE_HTML);
+
+
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -226,4 +390,24 @@ foreach($links as $class => $link){ print "\t<li class=\"$class\">$link</li>\n";
 
 <section>
 <div id="breadcrumbs"><?php print $breadcrumbs; ?></div>
+
+<nav class="local">
+	<h3><?php print $local_nav_title; ?></h3>
+
+	<?php print $local_nav; ?>
+
+	<div id="local-nav-search">
+		<form action="index.php" accept-charset="UTF-8" method="get" onsubmit="if(!this.q.value) { alert('Please enter search terms.'); return false; } else { return true; }">
+			<input type="hidden" name="p" value="core/search" />
+			<input type="hidden" name="flags" value="<?php print SEARCH_COLLECTIONCONTENT; ?>" />
+			<input type="hidden" name="collectionid" value="<?php print $collectionID; ?>" />
+			<input type="hidden" name="content" value="1" />
+			<label for="local-nav-search-box">Search this finding aid</label>
+			<input type="text" name="q" id="local-nav-search-box" value="<?php print $query; ?>" />
+			<input type="submit" value="Go" />
+		</form>
+	</div>
+</nav>
+
+<div id="right">
 <a name="main" id="main"></a>

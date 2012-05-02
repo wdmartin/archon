@@ -8,7 +8,7 @@
 
 isset($_ARCHON) or die();
 ?>
-
+</div>
 
 </section>
 <footer>

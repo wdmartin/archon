@@ -107,6 +107,7 @@ footer {
 h2 {
 	font-size: 24px;
 	color: #2C5093;
+	margin-top: 19px;
 }
 
 blockquote {
@@ -145,3 +146,26 @@ nav .active {
 #dlsearchblock { float: left; clear: left; margin-top: 2em; border: 1px solid #999; padding: 1em; font-size: 22px; }
 
 #subjects-filter { clear: left; margin-top: 2em; }
+
+nav.local {
+	float: left;
+	width: 212px;
+	padding: 8px;
+	border: 1px solid #999;
+	background: url("images/swirl-marble-blue.jpg") top left;
+	border-radius: 8px;
+	margin-top: 19px;
+}
+
+nav.local h3 {
+	color: #2C5093;
+	margin-top: 0;
+}
+
+nav.local ul {
+	list-style: none;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#right { margin-left: 248px; }
