@@ -7,13 +7,7 @@
  */
 
 isset($_ARCHON) or die();
-?>
-</div>
 
-</section>
-<footer>
-<?php
-$auth_items = array();
 $auth_form = '';
 
 if(!$_ARCHON->Security->isAuthenticated()){
@@ -34,10 +28,14 @@ $auth_form = <<<EOT
 </div>
 </div>
 EOT;
-
-	print $auth_form;
 }
+
 ?>
+</div>
+
+</section>
+<footer>
+<?php print $auth_form; ?>
 <p><a href='http://www.archon.org/'>Archon</a> 3.21 ©2012 <a href="http://www.uiuc.edu/" rel="external">The University of Illinois at Urbana-Champaign</a></p>
 <p>Marble background image courtesy of <a href="http://www.spiralgraphics.biz/packs/marble/index.htm?21">Spiral Graphics</a></p>
 </footer>
