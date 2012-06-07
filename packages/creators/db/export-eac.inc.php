@@ -28,7 +28,7 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
    $arrCreators = $_ARCHON->getCreatorsForRepository($repositoryID);
 
    $foldername = "archon_{$repositoryID}_eac";
-   $dirname = sys_get_temp_dir()."/".$foldername;
+   $dirname = realpath(sys_get_temp_dir())."/".$foldername;
 
    if(file_exists($dirname))
    {
@@ -152,7 +152,7 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
    
 
 
-   chdir(sys_get_temp_dir());
+   chdir(realpath(sys_get_temp_dir()));
 
    $tmp_zip = tempnam ("tmp", "tempname") . ".zip";
 

@@ -11,6 +11,21 @@
  * @authors Chris Rishel, Kyle Fox, Paul Sorensen
  */
 // fix for PHP versions before 5.2
+if ( !function_exists('sys_get_temp_dir')) 
+{
+  function sys_get_temp_dir() {
+    if($temp=getenv('TMP')) return $temp;
+    if($temp=getenv('TEMP')) return $temp;
+    if($temp=getenv('TMPDIR')) return $temp;
+    $temp=tempnam(__FILE__,'');
+    if (file_exists($temp)) {
+       unlink($temp);
+       return dirname($temp);
+    }
+    return null;
+  }
+}
+
 if(!function_exists('array_fill_keys'))
 {
 
