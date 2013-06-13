@@ -55,7 +55,6 @@ if($is_index){
 	</ul>
 </div>
 
-<?php if(isset($pages)){ echo($pages); } ?>
-
-
 <?php } else { print $content; } ?>
+
+<?php if(isset($pages)){ print $pages; } ?>
