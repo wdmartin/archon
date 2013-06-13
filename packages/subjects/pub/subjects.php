@@ -210,7 +210,10 @@ function subjects_listChildSubjects($ID)
 
       foreach($arrSubjects as $objSubject)
       {
-         $content .= $_ARCHON->PublicInterface->Templates[$_ARCHON->Package->APRCode]['SubjectList'];
+         ob_start();
+         eval($_ARCHON->PublicInterface->Templates[$_ARCHON->Package->APRCode]['SubjectList']);
+         $content .= ob_get_contents();
+         ob_end_clean();
       }
    }
 
