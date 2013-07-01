@@ -95,7 +95,8 @@ function Removefield($item,$key){
 	unset($item->Books);
 	unset($item->Accessions); 
 	unset($item->DigitalContent);
-
+	unset($item->Language);
+	unset($item->Creators);
 
 
 
