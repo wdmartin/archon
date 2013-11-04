@@ -364,6 +364,43 @@ abstract class Collections_Archon
    }
 
    /**
+    * Retrieves 100 Collections from the database
+    *
+    * The returned array of Collection objects
+    * is sorted by ID and has IDs as keys.
+    *
+    * This function does NOT load content or retrieve
+    * related information like subjects, creators, etc.
+    *
+    * @param integer $offset[optional]
+    */
+      
+	public function get100Collections($offset= 0)
+  
+   {
+     global $_ARCHON;
+      $arrCollections = array();
+	  $query = "SELECT * from tblCollections_Collections ORDER BY ID";
+		$_ARCHON->mdb2->setLimit(100,$offset);	
+        $result = $_ARCHON->mdb2->query($query);
+        if(PEAR::isError($result))
+        {
+            trigger_error($result->getMessage(), E_USER_ERROR);
+        }
+        if(!$result->numRows())          // If there is no content found
+        {
+            $result->free();
+            return false;
+        }       
+        while($row = $result->fetchRow())
+        {
+            $arrCollections[$row['ID']] = New Collection($row);
+        }
+        $result->free();
+      	return $arrCollections;
+   }
+
+   /**
     * Retrieves all Collections from the database
     *
     * The returned array of Collection objects
