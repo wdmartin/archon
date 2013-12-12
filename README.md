@@ -101,3 +101,7 @@ D: Finalize the Installation
 Delete or rename the file packages/core/install/install.php.
 
 Your installation of Archon is complete! Go to the web address to start using Archon.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/archonproject/archon/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
