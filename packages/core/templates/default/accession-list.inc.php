@@ -276,8 +276,8 @@ function Removefield($item,$key){
     unset($item->CollectionEntries);
     unset($item->LocationEntries);
     if ($item->AccessionDate == "") {$item->AccessionDate = "99990101";} //force dummy acccession date if not set    
-    if (substr($item->AccessionDate, 4, 2) == "00") {$item->AccessionDate = substr_replace($item->AccessionDate, "01", 4, 2);} //force month, day to 0101 if set to 0000
-  	if (substr($item->AccessionDate, 6, 2) == "00") {$item->AccessionDate = substr_replace($item->AccessionDate, "01", 6, 2);} //force month, day to 0101 if set to 0000
+    if (substr($item->AccessionDate, 4, 2) == "00") {$item->AccessionDate = substr_replace($item->AccessionDate, "01", 4, 2);} //force month, day to 0101 if set to 0000, to passes ISO test
+  	if (substr($item->AccessionDate, 6, 2) == "00") {$item->AccessionDate = substr_replace($item->AccessionDate, "01", 6, 2);}
     
 }
 
