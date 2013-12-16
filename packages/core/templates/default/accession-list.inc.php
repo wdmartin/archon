@@ -69,6 +69,7 @@ if ($_ARCHON->Security->Session->verifysession($session)){
                     $arrAccessionbatch[$accessionRelatedObject['AccessionID']]->LocationEntries[] = array_slice($accessionRelatedObject,1);
                     }
                 }
+                //var_dump ($arrAccessionbatch);
                  //Locations
 					RemoveBad($arrAccessionbatch);
 					$arrAccessionbatch = objectToArray($arrAccessionbatch); 
@@ -181,9 +182,10 @@ function getAccessionlocations()
                 ExtentUnitID
               FROM
                 tblAccessions_AccessionLocationIndex
-              INNER JOIN tblCollections_Locations ON tblAccessions_AccessionLocationIndex.LocationID = tblCollections_Locations.ID";
+              INNER JOIN 
+              	tblCollections_Locations ON tblAccessions_AccessionLocationIndex.LocationID = tblCollections_Locations.ID
+              ORDER BY tblAccessions_AccessionLocationIndex.ID ASC";
     $result = $_ARCHON->mdb2->query($query);
-
 
     if(PEAR::isError($result))
     {
@@ -196,7 +198,6 @@ function getAccessionlocations()
     }
 
     $result->free();
-
     return $arrAccesslocations;
 
 }
@@ -254,8 +255,10 @@ function Removefield($item,$key){
 	$item->PrimaryCreator = strval($item->PrimaryCreator);
 	
 	if (isset($item->LocationEntries)){
-        foreach ($item->LocationEntries as &$loc){  
+		$positionstart = 1;
+        foreach ($item->LocationEntries as &$loc){
             $loc[ExtentUnitID] = strval($loc[ExtentUnitID]);
+            $loc[DisplayPosition]=strval($positionstart++);
          }
         } 
 	
@@ -276,8 +279,8 @@ function Removefield($item,$key){
     unset($item->CollectionEntries);
     unset($item->LocationEntries);
     if ($item->AccessionDate == "") {$item->AccessionDate = "99990101";} //force dummy acccession date if not set    
-    if (substr($item->AccessionDate, 4, 2) == "00") {$item->AccessionDate = substr_replace($item->AccessionDate, "01", 4, 2);} //force month, day to 0101 if set to 0000
-  	if (substr($item->AccessionDate, 6, 2) == "00") {$item->AccessionDate = substr_replace($item->AccessionDate, "01", 6, 2);} //force month, day to 0101 if set to 0000
+    if (substr($item->AccessionDate, 4, 2) == "00") {$item->AccessionDate = substr_replace($item->AccessionDate, "01", 4, 2);} //force month, day to 0101 if set to 0000, to passes ISO test
+  	if (substr($item->AccessionDate, 6, 2) == "00") {$item->AccessionDate = substr_replace($item->AccessionDate, "01", 6, 2);}
     
 }
 

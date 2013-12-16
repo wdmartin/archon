@@ -178,7 +178,7 @@ function getCollectionlocations()
                 FROM
                 tblCollections_Locations
                 INNER JOIN tblCollections_CollectionLocationIndex ON LocationID = tblCollections_Locations.ID
-                ";
+                ORDER BY tblCollections_CollectionLocationIndex.ID ASC";
     $result = $_ARCHON->mdb2->query($query);
 
 
@@ -238,8 +238,10 @@ function MakeNormal($item,$key){
 	$item->PrimaryCreator = strval($item->PrimaryCreator);
 	
 	if (isset($item->Locations)){
+		$positonstart = 1 ;
         foreach ($item->Locations as &$loc){  
             $loc[ExtentUnitID] = strval($loc[ExtentUnitID]);
+            $loc[DisplayPosition]=strval($positonstart++);
          }
         } 
 	
