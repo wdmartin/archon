@@ -69,6 +69,7 @@ if ($_ARCHON->Security->Session->verifysession($session)){
                     $arrAccessionbatch[$accessionRelatedObject['AccessionID']]->LocationEntries[] = array_slice($accessionRelatedObject,1);
                     }
                 }
+                //var_dump ($arrAccessionbatch);
                  //Locations
 					RemoveBad($arrAccessionbatch);
 					$arrAccessionbatch = objectToArray($arrAccessionbatch); 
@@ -181,9 +182,10 @@ function getAccessionlocations()
                 ExtentUnitID
               FROM
                 tblAccessions_AccessionLocationIndex
-              INNER JOIN tblCollections_Locations ON tblAccessions_AccessionLocationIndex.LocationID = tblCollections_Locations.ID";
+              INNER JOIN 
+              	tblCollections_Locations ON tblAccessions_AccessionLocationIndex.LocationID = tblCollections_Locations.ID
+              ORDER BY tblAccessions_AccessionLocationIndex.ID ASC";
     $result = $_ARCHON->mdb2->query($query);
-
 
     if(PEAR::isError($result))
     {
@@ -196,7 +198,6 @@ function getAccessionlocations()
     }
 
     $result->free();
-
     return $arrAccesslocations;
 
 }
@@ -254,8 +255,10 @@ function Removefield($item,$key){
 	$item->PrimaryCreator = strval($item->PrimaryCreator);
 	
 	if (isset($item->LocationEntries)){
-        foreach ($item->LocationEntries as &$loc){  
+		$positionstart = 1;
+        foreach ($item->LocationEntries as &$loc){
             $loc[ExtentUnitID] = strval($loc[ExtentUnitID]);
+            $loc[DisplayPosition]=strval($positionstart++);
          }
         } 
 	
