@@ -7,9 +7,9 @@ if ($_ARCHON->Security->Session->verifysession($session)){
 
     if (isset($_REQUEST['batch_start'])){
     		$start = ( $_REQUEST['batch_start'] < 1 ? 1: $_REQUEST['batch_start']);
-			$arrClassifications = $_ARCHON->loadTable("tblCollections_Classifications", "Classification", "ID", NULL, NULL, NULL, false, NULL, false);
-			$arrClassificationbatch = (array_slice(RemoveBad($arrClassifications),$start-1,100,true));
-			
+			$arrClassifications = getClassifications();
+			$arrClassificationbatch = (array_slice($arrClassifications,$start-1,100,true));
+
 			header('HTTP/1.0 200 Created');				
 			if (empty($arrClassificationbatch)) {
 				exit ("No matching record(s) found for batch_start=".$_REQUEST['batch_start']);
@@ -31,20 +31,36 @@ if ($_ARCHON->Security->Session->verifysession($session)){
 
 //Functions
 
-function RemoveBad($Classification) {
-    
-	array_walk($Classification, 'RemoveElement');		
-    return $Classification;
-}
-function RemoveElement($item,$key){
-	$item->ID = strval($item->ID);
-	$item->ParentID = strval($item->ParentID);
-	$item->CreatorID = strval($item->CreatorID);
-    unset($item->Parent );
-	unset($item->Creator );
-	unset($item->Collections);
-	unset($item->Classifications);
-	unset($item->ToStringFields);
+function getClassifications()
+{
+    global $_ARCHON;
+
+    $query = "SELECT
+                ID,
+                ParentID,
+                ClassificationIdentifier,
+                CreatorID,
+                Title,
+                Description
+                FROM
+                tblCollections_Classifications
+                ORDER BY ParentID ASC, ID DESC";
+    $result = $_ARCHON->mdb2->query($query);
+
+    if(PEAR::isError($result))
+    {
+        trigger_error($result->getMessage(), E_USER_ERROR);
+    }
+
+    while($row = $result->fetchRow())
+    {
+        $arrClassifications[] = $row;
+    }
+
+    $result->free();
+
+    return $arrClassifications;
+
 }
 
 function objectToArray( $object ) {
