@@ -165,7 +165,6 @@ function getCollectionlocations()
 {
     global $_ARCHON;
 
-
     $query = "SELECT
                 CollectionID,
                 Location,
@@ -178,7 +177,7 @@ function getCollectionlocations()
                 FROM
                 tblCollections_Locations
                 INNER JOIN tblCollections_CollectionLocationIndex ON LocationID = tblCollections_Locations.ID
-                ORDER BY tblCollections_CollectionLocationIndex.ID ASC";
+                ORDER BY tblCollections_CollectionLocationIndex.Content ASC";
     $result = $_ARCHON->mdb2->query($query);
 
 
