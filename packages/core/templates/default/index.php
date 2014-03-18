@@ -17,6 +17,7 @@ $TemplateIndex['DigitalContentlist'] = 'digitalcontent-list.inc.php';
 $TemplateIndex['Digitalfilelist'] = 'digitalfile-list.inc.php';
 $TemplateIndex['Digitalfileblob'] = 'digitalfileblob.inc.php';
 $TemplateIndex['SearchTitle'] = 'search-title.inc.php';
+$TemplateIndex['MedusaList'] = 'medusa-list.inc.php';
 
 // Form sub-templates
 $TemplateIndex['FieldCategory'] = 'field-category.inc.php'; // Displays section headings within a form

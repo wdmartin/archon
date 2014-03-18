@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 header('Content-Type: application/json');
 isset($_ARCHON) or die();
 
@@ -80,7 +81,7 @@ if ($_ARCHON->Security->Session->verifysession($session)){
 					$arrEnum = getcontainertypes();		
 					$arrEnumbatch = array_slice($arrEnum,$start-1,100,true);
 					array_walk($arrEnumbatch, 'NormalizeArray');
-					array_walk($arrEnumbatch, 'RemoveContainerTypes');
+					//array_walk($arrEnumbatch, 'RemoveContainerTypes');
 					$arrEnumbatch = objectToArray($arrEnumbatch);	
 					if ($_ARCHON->db->ServerType == 'MSSQL') {array_walk_recursive($arrEnumbatch, 'myutf8_encode');}  //fix unicode for MSSQL migrations; function will incorrectly transform mysql unicode
 					echo (empty($arrEnumbatch) ? "No matching record(s) found for batch_start=" . $_REQUEST['batch_start'] : json_encode($arrEnumbatch));
