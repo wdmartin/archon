@@ -1,5 +1,5 @@
 <?php
-error_reporting (E_ALL);
+error_reporting(0);
 header('Content-Type: application/json');
 
 isset($_ARCHON) or die();
