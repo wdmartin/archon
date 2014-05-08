@@ -4826,7 +4826,7 @@ abstract class Core_Archon
    /**
     * @var string
     */
-   public $Revision = '2';
+   public $Revision = '2.1';
    /**
     * Repository object containing the default repository
     * (unless specified otherwise by setrepositoryid
