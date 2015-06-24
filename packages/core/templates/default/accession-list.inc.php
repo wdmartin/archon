@@ -13,7 +13,7 @@ if ($_ARCHON->Security->Session->verifysession($session)){
 
                 $SearchFlags = $in_SearchFlags ? $in_SearchFlags : SEARCH_ACCESSIONS;
 
-                $arrAccessions = $_ARCHON->searchAccessions('', $SearchFlags, 0, $objCollection->ID);
+                $arrAccessions = $_ARCHON->searchAccessions('', $SearchFlags, 0, $objCollection->ID, 0, 0, 1000000, 0);
                 
 				header('HTTP/1.0 200 Created');
 								
