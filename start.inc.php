@@ -6,7 +6,11 @@
  * @author Chris Rishel
  */
 
-set_magic_quotes_runtime(0);
+
+
+if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+	set_magic_quotes_runtime(false);
+}
 
 if(!$_REQUEST)
 {
