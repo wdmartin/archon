@@ -18,7 +18,7 @@ class LiveSession extends Session
       ini_set('session.gc_probability', '1');
       ini_set('session.gc_divisor', '10');
 
-      if(ini_get(session.gc_maxlifetime) < SESSION_EXPIRATION)
+      if(ini_get('session.gc_maxlifetime') < SESSION_EXPIRATION)
       {
          ini_set('session.gc_maxlifetime', SESSION_EXPIRATION);
       }
