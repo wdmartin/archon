@@ -586,7 +586,7 @@ abstract class Core_Archon
 
       if($String)
       {
-         $arrWords = split(" ", $String);
+         $arrWords = explode(" ", $String);
       }
 
       if(!empty($phrases))
