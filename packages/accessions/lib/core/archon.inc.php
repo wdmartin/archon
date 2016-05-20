@@ -211,7 +211,7 @@ abstract class Accessions_Archon
                call_user_func_array(array($this->mdb2, 'setLimit'), $limitparams);
                $prep = $this->mdb2->prepare($prepQuery->query, $prepQuery->types, MDB2_PREPARE_RESULT);
                $result = $prep->execute($prepQuery->vars);
-               if(PEAR::isError($result))
+               if(pear_isError($result))
                {
                   trigger_error($result->getMessage(), E_USER_ERROR);
                }

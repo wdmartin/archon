@@ -151,7 +151,7 @@ function getcontainertypes()
 
     $query = "SELECT ID, LevelContainer as ContainerType FROM tblCollections_LevelContainers WHERE PhysicalContainer = '1'";
     $result = $_ARCHON->mdb2->query($query);
-    if(PEAR::isError($result))
+    if(pear_isError($result))
     {
         trigger_error($result->getMessage(), E_USER_ERROR);
     }

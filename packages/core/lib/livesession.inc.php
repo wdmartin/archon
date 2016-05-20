@@ -90,7 +90,7 @@ class LiveSession extends Session
 
       $prep = $_ARCHON->mdb2->prepare('SELECT * FROM tblCore_Sessions WHERE Hash = ?', array('text'), MDB2_PREPARE_RESULT);
       $result = $prep->execute($this->Hash);
-      if (PEAR::isError($result))
+      if (pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -165,7 +165,7 @@ class LiveSession extends Session
 
       $prep = $_ARCHON->mdb2->prepare('DELETE FROM tblCore_Sessions WHERE Expires <= ?', array('integer'), MDB2_PREPARE_MANIP);
       $affected = $prep->execute(time());
-      if (PEAR::isError($affected))
+      if (pear_isError($affected))
       {
          trigger_error($affected->getMessage(), E_USER_ERROR);
       }
@@ -195,7 +195,7 @@ class LiveSession extends Session
 
       $prep = $_ARCHON->mdb2->prepare('DELETE FROM tblCore_Sessions WHERE Hash = ?', 'text', MDB2_PREPARE_MANIP);
       $affected = $prep->execute($this->Hash);
-      if (PEAR::isError($affected))
+      if (pear_isError($affected))
       {
          trigger_error($affected->getMessage(), E_USER_ERROR);
       }
@@ -203,7 +203,7 @@ class LiveSession extends Session
 
       $prep = $_ARCHON->mdb2->prepare('INSERT INTO tblCore_Sessions (Hash, UserID, RemoteHost, Expires, Persistent, SecureConnection) VALUES (?, ?, ?, ?, ?, ?)', array('text', 'integer', 'text', 'integer', 'boolean', 'boolean'), MDB2_PREPARE_MANIP);
       $affected = $prep->execute(array($this->Hash, $this->UserID, $_SERVER['REMOTE_ADDR'], $this->Expires, $this->Persistent, $requireSecureConnection));
-      if (PEAR::isError($affected))
+      if (pear_isError($affected))
       {
          trigger_error($affected->getMessage(), E_USER_ERROR);
       }
@@ -235,7 +235,7 @@ class LiveSession extends Session
 
       $prep = $_ARCHON->mdb2->prepare('DELETE FROM tblCore_Sessions WHERE Hash = ?', 'text', MDB2_PREPARE_MANIP);
       $affected = $prep->execute($this->Hash);
-      if (PEAR::isError($affected))
+      if (pear_isError($affected))
       {
          trigger_error($affected->getMessage(), E_USER_ERROR);
       }
@@ -384,7 +384,7 @@ class LiveSession extends Session
 
       $prep = $_ARCHON->mdb2->prepare('UPDATE tblCore_Sessions SET SecureConnection = 1 WHERE Hash = ?', 'text', MDB2_PREPARE_MANIP);
       $affected = $prep->execute($this->Hash);
-      if (PEAR::isError($affected))
+      if (pear_isError($affected))
       {
          trigger_error($affected->getMessage(), E_USER_ERROR);
       }
@@ -513,7 +513,7 @@ class LiveSession extends Session
 
         // do we want to update every time? we might want to change this to not update the expiration
         $affected = $_ARCHON->mdb2->exec("UPDATE tblCore_Sessions SET Expires = {$this->Expires} WHERE ID = {$this->ID}");
-        if(PEAR::isError($affected))
+        if(pear_isError($affected))
         {
             trigger_error($affected->getMessage(), E_USER_ERROR);
         }
@@ -541,7 +541,7 @@ class LiveSession extends Session
 
         $prep = $_ARCHON->mdb2->prepare('SELECT * FROM tblCore_Sessions WHERE Hash = ?', array('text'), MDB2_PREPARE_RESULT);
         $result = $prep->execute($hash);
-        if (PEAR::isError($result)) {
+        if (pear_isError($result)) {
             trigger_error($result->getMessage(), E_USER_ERROR);
         }
         $row = $result->fetchRow();
@@ -590,7 +590,7 @@ class LiveSession extends Session
 
         $prep = $_ARCHON->mdb2->prepare('UPDATE tblCore_Sessions SET Expires = ? WHERE ID = ?', array('integer', 'integer'), MDB2_PREPARE_MANIP);
         $affected = $prep->execute(array($this->Expires, $this->ID));
-        if (PEAR::isError($affected)) {
+        if (pear_isError($affected)) {
             trigger_error($affected->getMessage(), E_USER_ERROR);
         }
         $prep->free();

@@ -16,7 +16,7 @@ class ArchonInstaller
    {
       global $_ARCHON;
 
-      if (PEAR::isError($objPEAR))
+      if (pear_isError($objPEAR))
       {
          $error = '';
 
@@ -361,7 +361,7 @@ class ArchonInstaller
 
       $affected = $_ARCHON->mdb2->exec($query);
 
-      if (PEAR::isError($affected))
+      if (pear_isError($affected))
       {
          echo("ERROR: Could not create progress table -- ".$query."\n");
          trigger_error($affected->getMessage(), E_USER_ERROR);
@@ -371,7 +371,7 @@ class ArchonInstaller
 
       $affected = $_ARCHON->mdb2->exec($query);
 
-      if (PEAR::isError($affected))
+      if (pear_isError($affected))
       {
          echo("ERROR: Could not create progress table -- ".$query."\n");
          trigger_error($affected->getMessage(), E_USER_ERROR);
@@ -393,7 +393,7 @@ class ArchonInstaller
 
       $affected = $_ARCHON->mdb2->exec($query);
 
-      if (PEAR::isError($affected))
+      if (pear_isError($affected))
       {
          echo("ERROR: Could not drop progress table -- ".$query."\n");
          trigger_error($affected->getMessage(), E_USER_ERROR);
@@ -408,7 +408,7 @@ class ArchonInstaller
 
       $affected = $_ARCHON->mdb2->exec($query);
 
-      if (PEAR::isError($affected))
+      if (pear_isError($affected))
       {
          echo("ERROR: Could not update progress table -- ".$query."\n");
          trigger_error($affected->getMessage(), E_USER_ERROR);
@@ -421,7 +421,7 @@ class ArchonInstaller
 
       $query = "SELECT * FROM db_progress";
       $result = $_ARCHON->mdb2->query($query);
-      if (PEAR::isError($result))
+      if (pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -437,7 +437,7 @@ class ArchonInstaller
 
       $query = "SELECT * FROM db_progress";
       $result = $_ARCHON->mdb2->query($query);
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          $exists = false;
       }

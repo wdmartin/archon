@@ -70,7 +70,7 @@ $dboptions = array('debug' => 1, 'debug_handler' => array($_ARCHON->QueryLog, 'l
 
 $mdb2 =& MDB2::connect($dbdsn, $dboptions);
 
-if (PEAR::isError($mdb2))
+if (pear_isError($mdb2))
 {
    echo("Error connecting to database!<br />\n");
    trigger_error($mdb2->getMessage(), E_USER_ERROR);
@@ -84,7 +84,7 @@ if($_ARCHON->db->ServerType == 'MySQL' || $_ARCHON->db->ServerType == 'MySQLi')
    // this makes sure the encoding for the queries is expected
    $query = "SET NAMES 'utf8'";
    $affected = $_ARCHON->mdb2->exec($query);
-   if (PEAR::isError($affected))
+   if (pear_isError($affected))
    {
       trigger_error($affected->getMessage(), E_USER_ERROR);
    }

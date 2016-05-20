@@ -38,7 +38,7 @@ abstract class Subjects_Archon
          $query = "SELECT ID FROM tblSubjects_Subjects WHERE (Subject LIKE '0%' OR Subject LIKE '1%' OR Subject LIKE '2%' OR Subject LIKE '3%' OR Subject LIKE '4%' OR Subject LIKE '5%' OR Subject LIKE '6%' OR Subject LIKE '7%' OR Subject LIKE '8%' OR Subject LIKE '9%')$subjecttypeidquery";
          $prep = $this->mdb2->prepare($query, $subjecttypeidtypes, MDB2_PREPARE_RESULT);
          $result = $prep->execute($subjecttypeidtypes);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -54,7 +54,7 @@ abstract class Subjects_Archon
             $char = chr($i);
 
             $result = $prep->execute(array_merge(array("$char%"), $subjecttypeidvars));
-            if(PEAR::isError($result))
+            if(pear_isError($result))
             {
                trigger_error($result->getMessage(), E_USER_ERROR);
             }
@@ -467,7 +467,7 @@ abstract class Subjects_Archon
       $this->mdb2->setLimit(1);
       $prep = $this->mdb2->prepare("SELECT ID FROM tblSubjects_Subjects WHERE Subject LIKE ?$parent_query ORDER BY ParentID", array_merge(array('text'), $parent_types), MDB2_PREPARE_RESULT);
       $result = $prep->execute(array_merge(array($String), $parent_vars));
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -523,7 +523,7 @@ abstract class Subjects_Archon
 
       $prep = $this->mdb2->prepare($query, $subjecttypeidtypes, MDB2_PREPARE_RESULT);
       $result = $prep->execute($subjecttypeidvars);
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -552,7 +552,7 @@ abstract class Subjects_Archon
       $this->mdb2->setLimit(1);
       $prep = $this->mdb2->prepare("SELECT ID FROM tblSubjects_SubjectSources WHERE SubjectSource LIKE ?", 'text', MDB2_PREPARE_RESULT);
       $result = $prep->execute($String);
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -623,7 +623,7 @@ abstract class Subjects_Archon
                $result = $facetedPrep->execute(trim($facet));
             }
 
-            if(PEAR::isError($result))
+            if(pear_isError($result))
             {
                trigger_error($result->getMessage(), E_USER_ERROR);
             }
@@ -749,7 +749,7 @@ abstract class Subjects_Archon
          call_user_func_array(array($this->mdb2, 'setLimit'), $limitparams);
          $prep = $this->mdb2->prepare($query, $wheretypes, MDB2_PREPARE_RESULT);
          $result = $prep->execute($wherevars);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }

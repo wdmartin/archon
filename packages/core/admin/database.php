@@ -570,7 +570,7 @@ function database_ui_main()
                if(CONFIG_CORE_MODIFICATION_LOG_ENABLED)
                {
                   $result = $prep->execute($tblName);
-                  if (PEAR::isError($result))
+                  if (pear_isError($result))
                   {
                      trigger_error($result->getMessage(), E_USER_ERROR);
                   }

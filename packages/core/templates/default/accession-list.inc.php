@@ -100,7 +100,7 @@ function getAccessioncreators()
     $result = $_ARCHON->mdb2->query($query);
 
 
-    if(PEAR::isError($result))
+    if(pear_isError($result))
     {
         trigger_error($result->getMessage(), E_USER_ERROR);
     }
@@ -125,7 +125,7 @@ function getAccessioncollections()
     $result = $_ARCHON->mdb2->query($query);
 
 
-    if(PEAR::isError($result))
+    if(pear_isError($result))
     {
         trigger_error($result->getMessage(), E_USER_ERROR);
     }
@@ -152,7 +152,7 @@ function getAccessionSubjects()
     $result = $_ARCHON->mdb2->query($query);
 
 
-    if(PEAR::isError($result))
+    if(pear_isError($result))
     {
         trigger_error($result->getMessage(), E_USER_ERROR);
     }
@@ -188,7 +188,7 @@ function getAccessionlocations()
               ORDER BY tblAccessions_AccessionLocationIndex.ID ASC";
     $result = $_ARCHON->mdb2->query($query);
 
-    if(PEAR::isError($result))
+    if(pear_isError($result))
     {
         trigger_error($result->getMessage(), E_USER_ERROR);
     }

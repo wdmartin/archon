@@ -131,7 +131,7 @@ if($_REQUEST['f'] == 'import-' . $UtilityCode)
 //            $languagePrep = $_ARCHON->mdb2->prepare($query, 'text', MDB2_PREPARE_RESULT);
 //         }
 //         $result = $languagePrep->execute($LanguageShort);
-//         if (PEAR::isError($result))
+//         if (pear_isError($result))
 //         {
 //            trigger_error($result->getMessage(), E_USER_ERROR);
 //         }
@@ -233,7 +233,7 @@ if($_REQUEST['f'] == 'import-' . $UtilityCode)
                         $checkPrep = $_ARCHON->mdb2->prepare($query, array('integer', 'integer', 'integer', 'integer', 'text'), MDB2_PREPARE_RESULT);
                      }
                      $result = $checkPrep->execute(array($LanguageID, $PackageID, $ModuleID, $PhraseTypeID, $PhraseName));
-                     if (PEAR::isError($result))
+                     if (pear_isError($result))
                      {
                         trigger_error($result->getMessage(), E_USER_ERROR);
                      }

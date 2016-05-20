@@ -61,7 +61,7 @@ abstract class Collections_Archon
 
          $prep = $this->mdb2->prepare("SELECT ID FROM tblCollections_Collections WHERE (SortTitle LIKE '0%' OR SortTitle LIKE '1%' OR SortTitle LIKE '2%' OR SortTitle LIKE '3%' OR SortTitle LIKE '4%' OR SortTitle LIKE '5%' OR SortTitle LIKE '6%' OR SortTitle LIKE '7%' OR SortTitle LIKE '8%' OR SortTitle LIKE '9%') $Conditions", $ConditionTypes, MDB2_PREPARE_RESULT);
          $result = $prep->execute($ConditionsVars);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -78,7 +78,7 @@ abstract class Collections_Archon
             $char = chr($i);
 
             $result = $prep->execute(array_merge(array("$char%"), $ConditionsVars));
-            if(PEAR::isError($result))
+            if(pear_isError($result))
             {
                trigger_error($result->getMessage(), E_USER_ERROR);
             }
@@ -104,7 +104,7 @@ abstract class Collections_Archon
 
          $prep = $this->mdb2->prepare("SELECT ID FROM tblCollections_Collections $Conditions", $ConditionsTypes, MDB2_PREPARE_RESULT);
          $result = $prep->execute($ConditionsVars);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -139,7 +139,7 @@ abstract class Collections_Archon
 
          $query = "SELECT ID FROM tblCollections_Books WHERE (Title LIKE '0%' OR Title LIKE '1%' OR Title LIKE '2%' OR Title LIKE '3%' OR Title LIKE '4%' OR Title LIKE '5%' OR Title LIKE '6%' OR Title LIKE '7%' OR Title LIKE '8%' OR Title LIKE '9%')";
          $result = $this->mdb2->query($query);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -157,7 +157,7 @@ abstract class Collections_Archon
 
             //  $query = "SELECT ID FROM tblCollections_Books WHERE Title LIKE '$char%'";
             $result = $prep->execute("$char%");
-            if(PEAR::isError($result))
+            if(pear_isError($result))
             {
                trigger_error($result->getMessage(), E_USER_ERROR);
             }
@@ -178,7 +178,7 @@ abstract class Collections_Archon
 
          $query = "SELECT ID FROM tblCollections_Books";
          $result = $this->mdb2->query($query);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -383,7 +383,7 @@ abstract class Collections_Archon
 	  $query = "SELECT * from tblCollections_Collections ORDER BY ID";
 		$_ARCHON->mdb2->setLimit(100,$offset);	
         $result = $_ARCHON->mdb2->query($query);
-        if(PEAR::isError($result))
+        if(pear_isError($result))
         {
             trigger_error($result->getMessage(), E_USER_ERROR);
         }
@@ -696,7 +696,7 @@ abstract class Collections_Archon
       }
 
       $result = $preps[$query]->execute(array_merge(array($CollectionContentID), $collectionvars));
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -824,7 +824,7 @@ abstract class Collections_Archon
                $preps[$query] = $this->mdb2->prepare($query, $types, MDB2_PREPARE_RESULT);
             }
             $result = $preps[$query]->execute($vars);
-            if(PEAR::isError($result))
+            if(pear_isError($result))
             {
                trigger_error($result->getMessage(), E_USER_ERROR);
             }
@@ -899,7 +899,7 @@ abstract class Collections_Archon
          $prep = $this->mdb2->prepare($query, array('integer', 'integer', 'text', 'integer'), MDB2_PREPARE_RESULT);
       }
       $result = $prep->execute(array($CollectionID, $LevelContainerID, $LevelContainerIdentifier, $ParentID));
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -969,7 +969,7 @@ abstract class Collections_Archon
             $preps[$query] = $this->mdb2->prepare($query, $types, MDB2_PREPARE_RESULT);
          }
          $result = $preps[$query]->execute($vars);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -1012,7 +1012,7 @@ abstract class Collections_Archon
          $preps[$query] = $this->mdb2->prepare($query, $types, MDB2_PREPARE_RESULT);
       }
       $result = $preps[$query]->execute($vars);
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -1106,7 +1106,7 @@ abstract class Collections_Archon
 
       $prep = $this->mdb2->prepare($query, $andTypes, MDB2_PREPARE_RESULT);
       $result = $prep->execute($andVars);
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -1151,7 +1151,7 @@ abstract class Collections_Archon
       }
       $result = $this->mdb2->query($query);
 
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -1202,7 +1202,7 @@ abstract class Collections_Archon
       $query = "SELECT * FROM tblCollections_Collections WHERE ClassificationID = ? $andquery";
       $prep = $this->mdb2->prepare($query, array_merge(array('integer'), $andtypes), MDB2_PREPARE_RESULT);
       $result = $prep->execute(array_merge(array($ClassificationID), $andvars));
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -1247,7 +1247,7 @@ abstract class Collections_Archon
       $this->mdb2->setLimit(1);
       $prep = $this->mdb2->prepare('SELECT ID FROM tblCollections_LevelContainers WHERE LevelContainer LIKE ?', 'text', MDB2_PREPARE_RESULT);
       $result = $prep->execute($String);
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -1308,7 +1308,7 @@ abstract class Collections_Archon
          $prep = $this->mdb2->prepare($query, 'integer', MDB2_PREPARE_RESULT);
       }
       $result = $prep->execute($LocationID);
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -1375,7 +1375,7 @@ abstract class Collections_Archon
       $this->mdb2->setLimit(1);
       $prep = $this->mdb2->prepare('SELECT ID FROM tblCollections_MaterialTypes WHERE MaterialType LIKE ?', 'text', MDB2_PREPARE_RESULT);
       $result = $prep->execute($String);
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -1438,7 +1438,7 @@ abstract class Collections_Archon
          $prep = $this->mdb2->prepare($query, array('integer', 'integer', 'integer'), MDB2_PREPARE_RESULT);
       }
       $result = $prep->execute(array($CollectionID, $LevelContainerID, $ParentID));
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -1503,7 +1503,7 @@ abstract class Collections_Archon
          $result = $exIDprep->execute(array($CollectionID, $ParentID, $ExcludeID));
       }
 
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -1531,7 +1531,7 @@ abstract class Collections_Archon
 //            }
 //            $result = $exIDlistprep->execute(array($CollectionID, $ParentID, $ExcludeID));
 //         }
-//         if (PEAR::isError($result))
+//         if (pear_isError($result))
 //         {
 //            trigger_error($result->getMessage(), E_USER_ERROR);
 //         }
@@ -1582,7 +1582,7 @@ abstract class Collections_Archon
          $prep = $this->mdb2->prepare($query, array('integer', 'integer'), MDB2_PREPARE_RESULT);
       }
       $result = $prep->execute(array($CollectionID, $ParentID));
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -1643,7 +1643,7 @@ abstract class Collections_Archon
          $prep = $this->mdb2->prepare($query, array('integer', 'integer'), MDB2_PREPARE_RESULT);
       }
       $result = $prep->execute(array($objContent->ParentID, $objContent->CollectionID));
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -1849,7 +1849,7 @@ abstract class Collections_Archon
       call_user_func_array(array($this->mdb2, 'setLimit'), $limitparams);
       $prep = $this->mdb2->prepare($query, array_merge($userfieldtypes, $texttypes, $idtypes, $subtypes, $enabledtypes), MDB2_PREPARE_RESULT);
       $result = $prep->execute(array_merge($userfieldvars, $textvars, $idvars, $subvars, $enabledvars));
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -2145,13 +2145,13 @@ abstract class Collections_Archon
          // Run query to list collections
          call_user_func_array(array($this->mdb2, 'setLimit'), $limitparams);
          $prep = $this->mdb2->prepare($prepQuery->query, $prepQuery->types, MDB2_PREPARE_RESULT);
-         if(PEAR::isError($prep))
+         if(pear_isError($prep))
          {
             echo($prepQuery->query);
             trigger_error($prep->getMessage(), E_USER_ERROR);
          }
          $result = $prep->execute($prepQuery->vars);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -2227,7 +2227,7 @@ abstract class Collections_Archon
          call_user_func_array(array($this->mdb2, 'setLimit'), $limitparams);
          $prep = $this->mdb2->prepare($query, $types, MDB2_PREPARE_RESULT);
          $result = $prep->execute($vars);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -2260,7 +2260,7 @@ abstract class Collections_Archon
                   // Calling the Collection dbLoad method will end up taking more time than just running the
                   // query to get the basic information
                   $collectionresult = $collectionprep->execute($objContent->CollectionID);
-                  if(PEAR::isError($collectionresult))
+                  if(pear_isError($collectionresult))
                   {
                      trigger_error($collectionresult->getMessage(), E_USER_ERROR);
                   }
@@ -2527,7 +2527,7 @@ abstract class Collections_Archon
          call_user_func_array(array($this->mdb2, 'setLimit'), $limitparams);
          $prep = $this->mdb2->prepare($prepQuery->query, $prepQuery->types, MDB2_PREPARE_RESULT);
          $result = $prep->execute($prepQuery->vars);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -2603,7 +2603,7 @@ abstract class Collections_Archon
          call_user_func_array(array($this->mdb2, 'setLimit'), $limitparams);
          $prep = $this->mdb2->prepare($query, $types, MDB2_PREPARE_RESULT);
          $result = $prep->execute($vars);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -2636,7 +2636,7 @@ abstract class Collections_Archon
                   // Calling the Collection dbLoad method will end up taking more time than just running the
                   // query to get the basic information
                   $collectionresult = $collectionprep->execute($objContent->CollectionID);
-                  if(PEAR::isError($collectionresult))
+                  if(pear_isError($collectionresult))
                   {
                      trigger_error($collectionresult->getMessage(), E_USER_ERROR);
                   }
@@ -2920,7 +2920,7 @@ abstract class Collections_Archon
          call_user_func_array(array($this->mdb2, 'setLimit'), $limitparams);
          $prep = $this->mdb2->prepare($prepQuery->query, $prepQuery->types, MDB2_PREPARE_RESULT);
          $result = $prep->execute($prepQuery->vars);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -3007,7 +3007,7 @@ abstract class Collections_Archon
          call_user_func_array(array($this->mdb2, 'setLimit'), $limitparams);
          $prep = $this->mdb2->prepare($query, $types, MDB2_PREPARE_RESULT);
          $result = $prep->execute($vars);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -3028,7 +3028,7 @@ abstract class Collections_Archon
                   // Calling the Collection dbLoad method will end up taking more time than just running the
                   // query to get the basic information
                   $collectionresult = $collectionprep->execute($row['CollectionID']);
-                  if(PEAR::isError($result))
+                  if(pear_isError($result))
                   {
                      trigger_error($result->getMessage(), E_USER_ERROR);
                   }
@@ -3252,7 +3252,7 @@ abstract class Collections_Archon
 
          call_user_func_array(array($this->mdb2, 'setLimit'), $limitparams);
          $prep = $this->mdb2->prepare($query, $wheretypes, MDB2_PREPARE_RESULT);
-         if(PEAR::isError($prep))
+         if(pear_isError($prep))
          {
             echo($query);
             print_r($wheretypes);
@@ -3260,7 +3260,7 @@ abstract class Collections_Archon
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
          $result = $prep->execute($wherevars);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -3380,13 +3380,13 @@ abstract class Collections_Archon
          // Run query to list collections
          call_user_func(array($this->mdb2, 'setLimit'), $Limit);
          $prep = $this->mdb2->prepare($prepQuery->query, $prepQuery->types, MDB2_PREPARE_RESULT);
-         if(PEAR::isError($prep))
+         if(pear_isError($prep))
          {
             echo($prepQuery->query);
             trigger_error($prep->getMessage(), E_USER_ERROR);
          }
          $result = $prep->execute($prepQuery->vars);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -3455,7 +3455,7 @@ abstract class Collections_Archon
       {
          $this->mdb2->setLimit(1);
          $result = $getPrep->execute($ID);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -3519,7 +3519,7 @@ abstract class Collections_Archon
          }
 
          $result = $checkPrep->execute(array($LevelContainerID, $arrLCIDs[$ID], $ParentID, $CollectionID));
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -3554,7 +3554,7 @@ abstract class Collections_Archon
       {
 
          $affected = $updatePrep->execute(array($LCID, $ID));
-         if(PEAR::isError($affected))
+         if(pear_isError($affected))
          {
             trigger_error($affected->getMessage(), E_USER_ERROR);
          }
@@ -3709,7 +3709,7 @@ abstract class Collections_Archon
 
       $query = "UPDATE tblCollections_Content SET SortOrder = SortOrder {$operator} {$Amount} WHERE CollectionID = {$CollectionID} AND ParentID = {$ParentID} AND {$range}{$notid}";
       $affected = $this->mdb2->exec($query);
-      if(PEAR::isError($affected))
+      if(pear_isError($affected))
       {
          trigger_error($affected->getMessage(), E_USER_ERROR);
       }
