@@ -192,10 +192,11 @@ abstract class ArchonObject
       {
          foreach($_ARCHON->Mixins[get_class($this)]->Variables as $VariableName => $DefaultValue)
          {
-            $val = $ID_or_Row[strtolower($VariableName)];
-            if($isRow && isset($val))
+            if ($isRow)
             {
-               $this->$VariableName = $val;
+               $val = $ID_or_Row[strtolower($VariableName)];
+               if (isset($val))
+                  $this->$VariableName = $val;
             }
             elseif(encoding_strtoupper($VariableName) != 'ID' && !isset($this->$VariableName))
             {
