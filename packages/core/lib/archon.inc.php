@@ -34,6 +34,9 @@ abstract class Core_Archon
          return false;
       }
 
+      isset($this->db->ImportUtilities[$PackageID][$UtilityCode]) or
+         $this->db->ImportUtilities[$PackageID][$UtilityCode] = new stdClass();
+
       if(file_exists("packages/{$this->Packages[$PackageID]->APRCode}/db/interfaces/import-{$UtilityCode}-interface.inc.php"))
       {
          $this->db->ImportUtilities[$PackageID][$UtilityCode]->InterfaceFile = "packages/{$this->Packages[$PackageID]->APRCode}/db/interfaces/import-{$UtilityCode}-interface.inc.php";
@@ -62,6 +65,9 @@ abstract class Core_Archon
          $this->declareError("Could not add DatabaseExportUtility: Package {$this->Packages[$PackageID]->APRCode} version $PackageVersion must be installed (installed version is {$this->Packages[$Package]->DBVersion}).");
          return false;
       }
+
+      isset($this->db->ExportUtilities[$PackageID][$UtilityCode]) or
+         $this->db->ExportUtilities[$PackageID][$UtilityCode] = new stdClass();
 
       if(file_exists("packages/{$this->Packages[$PackageID]->APRCode}/db/interfaces/export-{$UtilityCode}-interface.inc.php"))
       {
@@ -649,6 +655,8 @@ abstract class Core_Archon
 
          while($row = $result->fetchRow())
          {
+            isset($dbStats->Tables[$row['Name']]) or
+               $dbStats->Tables[$row['Name']] = new stdClass();
             $dbStats->Tables[$row['Name']]->Rows = $row['Rows'];
             $dbStats->Tables[$row['Name']]->DiskUsed = formatsize($row['Data_length'] + $row['Index_length']);
             $useddiskspace += $row['Data_length'] + $row['Index_length'];
@@ -717,6 +725,8 @@ abstract class Core_Archon
       $mdb2Tables = $this->mdb2->listTables();
       foreach($mdb2Tables as $tblName)
       {
+         isset($dbStructure[$tblName]) or
+            $dbStructure[$tblName] = new stdClass();
          $dbStructure[$tblName]->Columns = array();
 
          $mdb2TableInfo = $this->mdb2->tableInfo($tblName);
@@ -3617,6 +3627,18 @@ abstract class Core_Archon
          trigger_error("Could not set Mixin method parameters: Callback Function $Callback is not callable", E_USER_ERROR);
       }
 
+      isset($this->Mixins) or
+         $this->Mixins = [];
+      isset($this->Mixins[$ClassName]) or
+         $this->Mixins[$ClassName] = new stdClass();
+      isset($this->Mixins[$ClassName]->Methods) or
+         $this->Mixins[$ClassName]->Methods = [];
+      isset($this->Mixins[$ClassName]->Methods[$Method]) or
+         $this->Mixins[$ClassName]->Methods[$Method] = new stdClass();
+      isset($this->Mixins[$ClassName]->Methods[$Method]->Parameters) or
+         $this->Mixins[$ClassName]->Methods[$Method]->Parameters = [];
+      isset($this->Mixins[$ClassName]->Methods[$Method]->Parameters[$MixinClassName]) or
+         $this->Mixins[$ClassName]->Methods[$Method]->Parameters[$MixinClassName] = new stdClass();
       $this->Mixins[$ClassName]->Methods[$Method]->Parameters[$MixinClassName]->Callback = $Callback;
       $this->Mixins[$ClassName]->Methods[$Method]->Parameters[$MixinClassName]->MixOrder = $MixOrder;
 

@@ -562,6 +562,7 @@ abstract class Core_AdminSection
          global $_ARCHON;
 
          $this->Modal = true;
+         $this->DialogArguments = new stdClass();
          $this->DialogArguments->Type = $DialogType;
          $this->DialogArguments->Object = $Object;
          $this->DialogArguments->PValue = $PValue;
@@ -573,6 +574,7 @@ abstract class Core_AdminSection
       {
          global $_ARCHON;
 
+         $this->MultipleArguments = new stdClass();
          $this->MultipleArguments->Class = $Class;
          $this->MultipleArguments->ArrayName = $ArrayName;
          $this->MultipleArguments->ArrayLoadFunction = $ArrayLoadFunction;
@@ -583,6 +585,8 @@ abstract class Core_AdminSection
       {
          global $_ARCHON;
 
+         isset($this->PermissionArguments) or
+            $this->PermissionArguments = new stdClass();
          $this->PermissionArguments->GetPermissionsFunction = $GetPermissionsFunction;
 
          $_ARCHON->AdministrativeInterface->addReloadSection($this);

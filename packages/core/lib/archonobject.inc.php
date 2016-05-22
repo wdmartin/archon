@@ -230,6 +230,8 @@ abstract class ArchonObject
 
       if(!empty($_ARCHON->Mixins[get_class($this)]->Methods[$method]->Classes))
       {
+         isset($stackmember) or
+            $stackmember = new stdClass();
          $stackmember->Method = $method;
          $stackmember->Classes = $_ARCHON->Mixins[get_class($this)]->Methods[$method]->Classes;
          $_ARCHON->Callstack[] = $stackmember;
