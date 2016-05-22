@@ -129,7 +129,7 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
 
 
 
-   foreach($arrCollections as $objCollection)
+   foreach((array)$arrCollections as $objCollection)
    {
       $_REQUEST['id'] = $objCollection->ID;
       $_REQUEST['output'] = formatFileName($objCollection->getString('SortTitle',0,false,false));

@@ -511,7 +511,7 @@ abstract class Core_AdminSection
 
       echo("</tr>\n");
 
-      foreach ($_ARCHON->AdministrativeInterface->Object->{$this->MultipleArguments->ArrayName} as $objObject)
+      foreach ((array)$_ARCHON->AdministrativeInterface->Object->{$this->MultipleArguments->ArrayName} as $objObject)
       {
          $this->CurrentMultipleObject = $objObject;
 

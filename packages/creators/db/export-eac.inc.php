@@ -57,7 +57,7 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
 
 
 
-   foreach($arrCreators as $objCreator)
+   foreach((array)$arrCreators as $objCreator)
    {
       $_REQUEST['id'] = $objCreator->ID;
       $_REQUEST['output'] = formatFileName($objCreator->getString('Name',0,false,false));
