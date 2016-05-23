@@ -2360,7 +2360,7 @@ abstract class Core_Archon
       $this->Version = $this->Packages['core']->Version;
 
 
-      $arrDependencies = array_merge($this->Packages['core']->DependedUponBy, $this->Packages['core']->EnhancedBy);
+      $arrDependencies = array_merge((array)$this->Packages['core']->DependedUponBy, (array)$this->Packages['core']->EnhancedBy);
 
       while(!empty($arrDependencies))
       {
