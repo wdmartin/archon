@@ -280,9 +280,10 @@ abstract class ArchonObject
       else
       {
          $backtrace = debug_backtrace();
-         echo('<b>Warning</b>: Call to undefined function <b>' . get_class($this) . '::' . $method .
-                 '</b> in <b>' . $backtrace[1]['file'] . '</b> on line <b>' . $backtrace[1]['line'] . "</b><br />\n");
-
+         $message =
+            'Warning: Call to undefined function ' . get_class($this) . '::' . $method .
+            ' in ' . $backtrace[1]['file'] . ' on line ' . $backtrace[1]['line'];
+         error_log($message);
          return NULL;
       }
    }

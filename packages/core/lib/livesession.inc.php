@@ -522,7 +522,7 @@ class LiveSession extends Session
         {
             setcookie(session_name().'_persistent', 1, $this->Expires, $this->CookiePath);
         }
-        else
+        elseif (!headers_sent())
         {
             setcookie(session_name().'_persistent', 0, time()-86400, $this->CookiePath);
         }
