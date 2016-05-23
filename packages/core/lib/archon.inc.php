@@ -2378,7 +2378,7 @@ abstract class Core_Archon
          }
          else
          {
-            foreach(array_keys(array_merge($this->Packages[$Dependency]->DependedUponBy, $this->Packages[$Dependency]->EnhancedBy)) as $ChildDependency)
+            foreach(array_keys(array_merge((array)$this->Packages[$Dependency]->DependedUponBy, (array)$this->Packages[$Dependency]->EnhancedBy)) as $ChildDependency)
             {
                if($arrSeen[$ChildDependency] && !isset($arrTopologicalSort[$ChildDependency]))
                {
