@@ -2683,7 +2683,11 @@ abstract class Core_Archon
          }
 
          //$result = call_user_func(array($MixinClass, initialize));
-         eval("\$result = {$MixinClass}::initialize();");
+         $rm = new ReflectionMethod($MixinClass, "initialize");
+         if ($rm->isPublic() && $rm->isStatic())
+            eval("\$result = {$MixinClass}::initialize();");
+         else
+            error_log("declined to call nonexistent {$MixinClass}::initialize");
       }
    }
    
