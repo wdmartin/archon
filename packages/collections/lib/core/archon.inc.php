@@ -2096,6 +2096,8 @@ abstract class Collections_Archon
             $wherevars = array();
          }
 
+         isset($prepQuery) or
+            $prepQuery = new stdClass();
          $prepQuery->query = "SELECT ID, Title, SortTitle, ClassificationID, InclusiveDates, CollectionIdentifier FROM tblCollections_Collections $wherequery ORDER BY SortTitle, CollectionIdentifier";
          //$prepQuery->query = "SELECT * FROM tblCollections_Collections $wherequery ORDER BY CollectionIdentifier, SortTitle";
          $prepQuery->types = $wheretypes;
