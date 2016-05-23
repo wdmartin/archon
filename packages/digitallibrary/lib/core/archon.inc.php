@@ -788,6 +788,8 @@ ORDER BY tblDigitalLibrary_DigitalContent.Title";
             $wherevars = array();
          }
 
+         isset($prepQuery) or
+            $prepQuery = new stdClass();
          $prepQuery->query = "SELECT DISTINCT tblDigitalLibrary_DigitalContent.ID,tblDigitalLibrary_DigitalContent.Title,tblDigitalLibrary_DigitalContent.ContentURL,tblDigitalLibrary_DigitalContent.Identifier FROM tblDigitalLibrary_DigitalContent $wherequery ORDER BY tblDigitalLibrary_DigitalContent.Title";
          $prepQuery->types = $wheretypes;
          $prepQuery->vars = $wherevars;
