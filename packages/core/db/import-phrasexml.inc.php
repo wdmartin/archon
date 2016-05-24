@@ -174,7 +174,8 @@ if($_REQUEST['f'] == 'import-' . $UtilityCode)
             }
             $PackageID = $objPhrasePackage->ID;
 
-            ob_flush();
+            if (ob_get_level() > 0)
+               ob_flush();
             flush();
 
             $arrModuleElements = count($packagelement->module) > 1 ? $packagelement->module : array($packagelement->module);
