@@ -868,7 +868,7 @@ function get_enabled_compression_extensions()
  */
 function is_natural($var)
 {
-   return (strval(intval($var)) == strval($var)) && ($var >= 0);
+   return (is_numeric($var) && intval($var) == $var && $var >= 0);
 }
 
 function js_array($array, $quotes = true)
