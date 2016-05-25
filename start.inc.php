@@ -68,7 +68,7 @@ $_ARCHON->QueryLog = New QueryLog();
 
 $dboptions = array('debug' => 1, 'debug_handler' => array($_ARCHON->QueryLog, 'logQuery'), 'portability' => MDB2_PORTABILITY_ALL ^ MDB2_PORTABILITY_FIX_CASE);
 
-$mdb2 =& MDB2::connect($dbdsn, $dboptions);
+$mdb2 = MDB2::connect($dbdsn, $dboptions);
 
 if (pear_isError($mdb2))
 {
