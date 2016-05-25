@@ -43,7 +43,7 @@ if ($_ARCHON->Security->Session->verifysession($session)){
 				clean_up($arrout);
 				$arrout = objectToArray($arrout); 
 				if ($_ARCHON->db->ServerType == 'MSSQL') {array_walk_recursive($arrout, 'myutf8_encode');}  //fix unicode for MSSQL migrations; function will incorrectly transform mysql unicode
-				echo json_encode($arrout[0]);  // at some point, the object was nested with first element of a parent array, so don't encod the second, null object.-++----
+				echo  $_ARCHON->bbcode_to_html(json_encode($arrout[0]));  // at some point, the object was nested with first element of a parent array, so don't encod the second, null object.-++----
             }
             else
             {
