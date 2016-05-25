@@ -1,9 +1,6 @@
 # Archon-specific #
 ###################
 config.inc.php
-github
-github.pub
-themes/illinoisold/*
 
 # Compiled source #
 ###################
