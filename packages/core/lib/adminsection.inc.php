@@ -498,7 +498,7 @@ abstract class Core_AdminSection
       }
 
       is_array($_ARCHON->AdministrativeInterface->Object->{$this->MultipleArguments->ArrayName}) or
-         $_ARCHON->AdministrativeInterface->Object->{$this->MultipleArguments->ArrayName} = [];
+         $_ARCHON->AdministrativeInterface->Object->{$this->MultipleArguments->ArrayName} = array();
       array_unshift($_ARCHON->AdministrativeInterface->Object->{$this->MultipleArguments->ArrayName}, $objNewObject);
 
       echo("<table class='multipletable'>\n");
