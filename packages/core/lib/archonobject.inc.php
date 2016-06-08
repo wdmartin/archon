@@ -23,11 +23,7 @@ abstract class ArchonObject
          $prevresult = call_user_func_array(array($this, 'callOverridden'), $args);
       }
 
-      $rm = new ReflectionMethod($MixinClass, $method);
-      if ($rm->isPublic() && $rm->isStatic())
-         eval("\$result = {$MixinClass}::{$method}(" . implode(',', $arrStrArgs) . ");");
-      else
-         error_log("declined to call nonexistent {$MixinClass}::{$method}");
+      eval("\$result = {$MixinClass}::{$method}(" . implode(',', $arrStrArgs) . ");");
 
       // Simulate mixing before.
       if($_ARCHON->Mixins[get_class($this)]->Methods[$method]->Parameters[$MixinClass]->MixOrder == MIX_BEFORE)
