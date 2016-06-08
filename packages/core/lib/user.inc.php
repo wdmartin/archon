@@ -133,7 +133,7 @@ abstract class Core_User
          $this->PasswordHash = $row['Value'];
          $this->DisplayName = 'Super Administrator';
          isset($this->Usergroups) or
-            $this->Usergroups = [];
+            $this->Usergroups = array();
          $o = new stdClass();
          $o->DefaultPermissions = FULL_CONTROL | DELETE | UPDATE | ADD | READ;
          $this->Usergroups[] = $o;

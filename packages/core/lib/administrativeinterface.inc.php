@@ -146,7 +146,7 @@ abstract class Core_AdministrativeInterface
       $FieldName = end($FieldNames);
 
       isset($this->SearchOptions) or
-         $this->SearchOptions = [];
+         $this->SearchOptions = array();
       isset($this->SearchOptions[$FieldName]) or
          $this->SearchOptions[$FieldName] = new stdClass();
       $this->SearchOptions[$FieldName]->FieldNames = $FieldNames;

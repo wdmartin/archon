@@ -3636,11 +3636,11 @@ abstract class Core_Archon
       isset($this->Mixins[$ClassName]) or
          $this->Mixins[$ClassName] = new stdClass();
       isset($this->Mixins[$ClassName]->Methods) or
-         $this->Mixins[$ClassName]->Methods = [];
+         $this->Mixins[$ClassName]->Methods = array();
       isset($this->Mixins[$ClassName]->Methods[$Method]) or
          $this->Mixins[$ClassName]->Methods[$Method] = new stdClass();
       isset($this->Mixins[$ClassName]->Methods[$Method]->Parameters) or
-         $this->Mixins[$ClassName]->Methods[$Method]->Parameters = [];
+         $this->Mixins[$ClassName]->Methods[$Method]->Parameters = array();
       isset($this->Mixins[$ClassName]->Methods[$Method]->Parameters[$MixinClassName]) or
          $this->Mixins[$ClassName]->Methods[$Method]->Parameters[$MixinClassName] = new stdClass();
       $this->Mixins[$ClassName]->Methods[$Method]->Parameters[$MixinClassName]->Callback = $Callback;

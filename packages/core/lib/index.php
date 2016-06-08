@@ -15,7 +15,7 @@ class Archon extends ArchonObject
    public function __construct()
    {
       isset($this->Includes) or
-         $this->Includes = [];
+         $this->Includes = array();
       isset($this->Includes[get_class($this)]) or
          $this->Includes[get_class($this)] = new stdClass();
       $this->Includes[get_class($this)]->Constructed = true;

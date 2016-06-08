@@ -564,7 +564,8 @@ abstract class Core_AdminSection
          global $_ARCHON;
 
          $this->Modal = true;
-         $this->DialogArguments = new stdClass();
+         isset($this->DialogArguments) or
+            $this->DialogArguments = new stdClass();
          $this->DialogArguments->Type = $DialogType;
          $this->DialogArguments->Object = $Object;
          $this->DialogArguments->PValue = $PValue;
@@ -576,7 +577,8 @@ abstract class Core_AdminSection
       {
          global $_ARCHON;
 
-         $this->MultipleArguments = new stdClass();
+         isset($this->MultipleArguments) or
+            $this->MultipleArguments = new stdClass();
          $this->MultipleArguments->Class = $Class;
          $this->MultipleArguments->ArrayName = $ArrayName;
          $this->MultipleArguments->ArrayLoadFunction = $ArrayLoadFunction;

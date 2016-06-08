@@ -12,9 +12,10 @@ isset($_ARCHON->AdministrativeInterface) or
    $_ARCHON->AdministrativeInterface = new stdClass();
 isset($_ARCHON->AdministrativeInterface->Header) or
    $_ARCHON->AdministrativeInterface->Header = new stdClass();
-isset($_ARCHON->AdministrativeInterface->Header->NoControls) or
-   $_ARCHON->AdministrativeInterface->Header->NoControls = new stdClass();
-$_ARCHON->AdministrativeInterface->Header->NoControls = $_ARCHON->AdministrativeInterface->Header->NoControls || $_REQUEST['nocontrols'];
+
+if(!isset($_ARCHON->AdministrativeInterface->Header->NoControls) || !$_ARCHON->AdministrativeInterface->Header->NoControls) {
+   $_ARCHON->AdministrativeInterface->Header->NoControls = $_REQUEST['nocontrols'];
+}
 
 header('Content-type: text/html; charset=UTF-8');
 ?>

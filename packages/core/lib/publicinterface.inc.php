@@ -16,7 +16,8 @@ abstract class Core_PublicInterface
             return false;
         }
 
-        $objNavigation = new stdClass();
+        isset($objNavigation) or
+           $objNavigation = new stdClass();
         $objNavigation->Title = $Title;
         $objNavigation->URL = $URL;
 
