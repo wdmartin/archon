@@ -193,7 +193,7 @@ class LiveSession extends Session
 
       $requireSecureConnection = ($_ARCHON->config->ForceHTTPS && $this->User->IsAdminUser);
 
-      $prep = $_ARCHON->mdb2->prepare('DELETE FROM tblCore_Sessions WHERE Hash = ?', 'text', MDB2_PREPARE_MANIP);
+      $prep = $_ARCHON->mdb2->prepare('DELETE FROM tblCore_Sessions WHERE Hash = ?');
       $affected = $prep->execute($this->Hash);
       if (pear_isError($affected))
       {
@@ -201,7 +201,7 @@ class LiveSession extends Session
       }
       $prep->free();
 
-      $prep = $_ARCHON->mdb2->prepare('INSERT INTO tblCore_Sessions (Hash, UserID, RemoteHost, Expires, Persistent, SecureConnection) VALUES (?, ?, ?, ?, ?, ?)', array('text', 'integer', 'text', 'integer', 'boolean', 'boolean'), MDB2_PREPARE_MANIP);
+      $prep = $_ARCHON->mdb2->prepare('INSERT INTO tblCore_Sessions (Hash, UserID, RemoteHost, Expires, Persistent, SecureConnection) VALUES (?, ?, ?, ?, ?, ?)', array('text', 'integer', 'text', 'integer', 'boolean', 'boolean'));
       $affected = $prep->execute(array($this->Hash, $this->UserID, $_SERVER['REMOTE_ADDR'], $this->Expires, $this->Persistent, $requireSecureConnection));
       if (pear_isError($affected))
       {
