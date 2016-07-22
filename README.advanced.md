@@ -28,13 +28,9 @@ Approximate installation for Ubuntu:
 
 ## Change settings in `config.inc.php`
 
-You can copy over your old `config.inc.php`. However, be sure to update this
-setting if you want to use the more modern MySQLi database adapter, which will
-have ongoing PHP support. Notice that the only change is the added `i` at the
-end of the old `MySQL` value.
-
-    $_ARCHON->db->ServerType = 'MySQLi';
-
+    $_ARCHON->db->Login = 'archon';
+    $_ARCHON->db->Password = 'password';
+    $_ARCHON->db->DatabaseName = 'archon';
 
 ## Configure Apache
 
