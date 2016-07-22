@@ -9,7 +9,7 @@ Archon is a content management system for archival information.
 *Note:* Advanced users installing on Ubuntu with MySQL should try these
 instructions:
 
-<README.advanced.md>
+[README.advanced.md](README.advanced.md)
 
 * * * * *
 
