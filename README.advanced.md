@@ -19,45 +19,86 @@ Approximate installation for Ubuntu:
 
 ## Install the Archon code (dev version)
 
-    mkdir -p /var/www/archon/{htdocs,log}
+First, make the directories that will hold the Archon instance:
+
+    sudo mkdir -p /var/www/archon/{htdocs,log}
+    sudo chown -R $USER:$USER /var/www/archon/htdocs
     cd /var/www/archon/htdocs
-    wget https://github.com/LibraryHost/archon/archive/aup-tr1.tar.gz
-    tar xfvz aup-tr1.tar.gz
-    mv archon-aup-tr1/* ./
+
+Next, download Archon. You can find download links for several Archon versions
+here:
+
+- <https://github.com/LibraryHost/archon/releases (current development location)
+- <https://github.com/archonproject/archon/releases> (official)
+
+In the following commands, we will download the release called "AUP-TR3", which
+is the most recent release at the time of writing.
+
+    wget https://github.com/LibraryHost/archon/archive/aup-tr3.tar.gz
+    tar xfvz aup-tr3.tar.gz
+    mv archon-aup-tr3/* ./
 
 
 ## Change settings in `config.inc.php`
 
-    $_ARCHON->db->Login = 'archon';
-    $_ARCHON->db->Password = 'password';
-    $_ARCHON->db->DatabaseName = 'archon';
+A default config file called `configblank.inc.php` is supplied with Archon.
+Make a copy of this default file:
+
+    cp configblank.inc.php config.php
+
+Then set these options in `config.inc.php`, picking your own values for
+`<username>`, `<password>`, and `<databasename>`:
+
+    $_ARCHON->db->Login = '<username>';
+    $_ARCHON->db->Password = '<password>';
+    $_ARCHON->db->DatabaseName = '<databasename>';
+    $_ARCHON->db->ServerType = 'MySQLi';
 
 ## Configure Apache
 
-Example configuration:
+Example configuration for a virtual host (for multiple websites hosted on one server):
 
 `/etc/apache2/sites-enabled/<name>.conf`:
 
+(`ServerName` can be set to anything you want.)
 
     <VirtualHost *:80>
-            ServerName  <name>.libraryhost.com
+            ServerName  archon.mydomain.com
             DirectoryIndex index.php
     
-            DocumentRoot /var/www/<name>/htdocs
+            DocumentRoot /var/www/archon/htdocs
             LogLevel warn
     
-            ErrorLog  /var/www/<name>/log/error.log
-            CustomLog /var/www/<name>/log/access.log combined
+            ErrorLog  /var/www/archon/log/error.log
+            CustomLog /var/www/archon/log/access.log combined
+    </VirtualHost>
+
+Example configuration for a dedicated host (only one website on the server):
+
+`/etc/apache2/sites-enabled/000-default`:
+
+
+    <VirtualHost *:80>
+            DirectoryIndex index.php
+    
+            DocumentRoot /var/www/archon/htdocs
+            LogLevel warn
+    
+            ErrorLog  /var/www/archon/log/error.log
+            CustomLog /var/www/archon/log/access.log combined
     </VirtualHost>
 
 
-## Prepare the Archon database and user
+## Prepare the Archon database and user on the new host
 
-On the new host:
+First, create a MySQL user that has the username and password you set in
+`config.inc.php` (see above).
 
-    $ mysql -u <username> -p <databasename>
+Log in to MySQL as the root user:
 
-At the prompt, type the following to load the database:
+    $ mysql -u root -p
+
+At the prompt, type the following to create the user:
 
     mysql> CREATE DATABASE <databasename>;
     mysql> CREATE USER <username>@localhost IDENTIFIED BY "<password>";
@@ -77,7 +118,8 @@ First, enable the installer:
 
     mv packages/core/install/install.php_ packages/core/install/install.php
 
-Use Archon's web interface to complete the installation process. When finished, disable the installer:
+Use the web interface to complete the installation process. When finished,
+disable the installer:
 
     mv packages/core/install/install.php packages/core/install/install.php_
 
@@ -85,7 +127,7 @@ Use Archon's web interface to complete the installation process. When finished, 
 
 Export the existing database from the old host with the following command. (You
 can find the proper values for <username> and <databasename> in the
-`config.inc.php` file in the Archon root directory.)
+`config.inc.php` file in the Archon root directory on your existing server.)
 
     mysqldump -u <username> -p <databasename> > archon.sql
 
