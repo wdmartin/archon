@@ -44,7 +44,7 @@ is the most recent release at the time of writing.
 A default config file called `configblank.inc.php` is supplied with Archon.
 Make a copy of this default file:
 
-    cp configblank.inc.php config.php
+    cp configblank.inc.php config.inc.php
 
 Then set these options in `config.inc.php`, picking your own values for
 `<username>`, `<password>`, and `<databasename>`:
