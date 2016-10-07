@@ -217,6 +217,7 @@ header('Content-type: text/html; charset=UTF-8');
          $SubjectsClass = $arrP[0] == 'subjects' ? 'currentBrowseLink' : 'browseLink';
          $CreatorsClass = $arrP[0] == 'creators' ? 'currentBrowseLink' : 'browseLink';
          $DigitalLibraryClass = $arrP[0] == 'digitallibrary' ? 'currentBrowseLink' : 'browseLink';
+         $AccessionsClass = $arrP[0] == 'accessions' ? 'currentBrowseLink' : 'browseLink';
          ?>
          <div id="browsebyblock">
             <span id="browsebyspan">
@@ -237,6 +238,9 @@ header('Content-type: text/html; charset=UTF-8');
             </span>
             <span class="<?php echo($ClassificationsClass); ?>">
                <a href="?p=collections/classifications" onclick="js_highlighttoplink(this.parentNode); return true;">Campus Units</a>
+            </span>
+            <span class="<?php echo($AccessionsClass); ?>">
+               <a href="?p=accessions/accessions" onclick="js_highlighttoplink(this.parentNode); return true;">Accessions</a>
             </span>
 
          </div>

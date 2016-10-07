@@ -1505,7 +1505,7 @@ abstract class Accessions_Accession
     * @param integer $MakeIntoLink[optional]
     * @return string
     */
-   public function toString($MakeIntoLink = LINK_NONE)
+   public function toString($MakeIntoLink = LINK_NONE, $ShowId = false)
    {
       global $_ARCHON;
 
@@ -1514,6 +1514,11 @@ abstract class Accessions_Accession
          $_ARCHON->declareError("Could not convert Accession to string: Accession ID not defined.");
          return false;
       }
+
+	  if($ShowId)
+	  {
+	     $String .= $this->getString('Identifier') . ' ';
+	  }
 
       if($MakeIntoLink == LINK_EACH || $MakeIntoLink == LINK_TOTAL)
       {
