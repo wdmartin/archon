@@ -6,7 +6,7 @@ Our reference system:
 - PHP 5.5.9
 - MySQL 5.5.49
 
-Approximate installation for Ubuntu:
+A mostly complete list of installation requirements for Ubuntu:
 
     sudo apt-get install apache2
     sudo apt-get install mysql-client mysql-server
@@ -17,7 +17,7 @@ Approximate installation for Ubuntu:
     sudo service apache2 restart
 
 
-## Install the Archon code (dev version)
+## Install the Archon code
 
 First, make the directories that will hold the Archon instance:
 
@@ -28,15 +28,14 @@ First, make the directories that will hold the Archon instance:
 Next, download Archon. You can find download links for several Archon versions
 here:
 
-- <https://github.com/LibraryHost/archon/releases (current development location)
-- <https://github.com/archonproject/archon/releases> (official)
+- <https://github.com/archonproject/archon/releases> (official releases)
+- <https://github.com/LibraryHost/archon/releases> (LibraryHost development location - Archon Update Project)
 
-In the following commands, we will download the release called "AUP-TR3", which
-is the most recent release at the time of writing.
+In the following commands, we will download a release. The actual release filename varies. `v0.0.0` is used as an example only.
 
-    wget https://github.com/LibraryHost/archon/archive/aup-tr3.tar.gz
-    tar xfvz aup-tr3.tar.gz
-    mv archon-aup-tr3/* ./
+    wget https://github.com/archonproject/archon/archive/v0.0.0.tar.gz
+    tar xfvz v0.0.0.tar.gz
+    mv v0.0.0/* ./
 
 
 ## Change settings in `config.inc.php`
