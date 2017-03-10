@@ -323,7 +323,7 @@ abstract class Accessions_Archon
 
       $prep = $this->mdb2->prepare($query, $andTypes, MDB2_PREPARE_RESULT);
       $result = $prep->execute($andVars);
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -396,7 +396,7 @@ abstract class Accessions_Archon
 
          $prep = $this->mdb2->prepare("SELECT ID FROM tblAccessions_Accessions WHERE (Title LIKE '0%' OR Title LIKE '1%' OR Title LIKE '2%' OR Title LIKE '3%' OR Title LIKE '4%' OR Title LIKE '5%' OR Title LIKE '6%' OR Title LIKE '7%' OR Title LIKE '8%' OR Title LIKE '9%') $Conditions", $ConditionTypes, MDB2_PREPARE_RESULT);
          $result = $prep->execute($ConditionsVars);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -413,7 +413,7 @@ abstract class Accessions_Archon
             $char = chr($i);
 
             $result = $prep->execute(array_merge(array("$char%"), $ConditionsVars));
-            if(PEAR::isError($result))
+            if(pear_isError($result))
             {
                trigger_error($result->getMessage(), E_USER_ERROR);
             }
@@ -439,7 +439,7 @@ abstract class Accessions_Archon
 
          $prep = $this->mdb2->prepare("SELECT ID FROM tblAccessions_Accessions $Conditions", $ConditionsTypes, MDB2_PREPARE_RESULT);
          $result = $prep->execute($ConditionsVars);
-         if(PEAR::isError($result))
+         if(pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
