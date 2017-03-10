@@ -2,12 +2,12 @@
 
 Archon is a content management system for archival information.
 
-# Archon Installation
+* * * * *
 
-## Advanced/quick installation
+## Quick Installation on Ubuntu for Advanced Users
 
-*Note:* Advanced users installing on Ubuntu with MySQL should try these
-instructions:
+Advanced users installing Archon on Ubuntu Linux with Apache and MySQL might
+want to use these instructions:
 
 [README.advanced.md](README.advanced.md)
 
