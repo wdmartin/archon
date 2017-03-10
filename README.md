@@ -176,3 +176,15 @@ Delete or rename the file `packages/core/install/install.php`.
 
 Your installation of Archon is complete! Go to the web address to start using
 Archon.
+
+* * * * *
+
+## Archon Security
+
+ModSecurity is an open-source web application firewall that detects and blocks
+malicious HTTP activity. You can improve Archon's security by running Archon
+with ModSecurity.
+
+Please see the following document in this repository for more information:
+
+[Using ModSecurity with Archon](ModSecurity.md)

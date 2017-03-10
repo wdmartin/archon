@@ -165,3 +165,15 @@ Log in as the `sa` user and go to Archon Administration | Archon Configuration
 
 If your Archon installation is customized, you'll need to make those same
 customizations to the new codebase.
+
+* * * * *
+
+## Archon Security
+
+ModSecurity is an open-source web application firewall that detects and blocks
+malicious HTTP activity. You can improve Archon's security by running Archon
+with ModSecurity.
+
+Please see the following document in this repository for more information:
+
+[Using ModSecurity with Archon](ModSecurity.md)
