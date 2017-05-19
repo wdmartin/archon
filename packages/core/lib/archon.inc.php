@@ -4803,7 +4803,7 @@ abstract class Core_Archon
     *
     * @var int
     */
-   public $CopyrightYear = 2012;
+   public $CopyrightYear = 2017;
    public $db = NULL;
    /**
     * When this variable is set to true, Archon is disabled to the public.
@@ -4844,11 +4844,11 @@ abstract class Core_Archon
    /**
     * @var string
     */
-   public $ReleaseDate = '2012.4.30';
+   public $ReleaseDate = '2017.5.19';
    /**
     * @var string
     */
-   public $Revision = '2.1';
+   public $Revision = '3 beta';
    /**
     * Repository object containing the default repository
     * (unless specified otherwise by setrepositoryid
