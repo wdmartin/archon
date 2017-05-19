@@ -1,6 +1,6 @@
 <?php
 /**
- * Header file for illiois theme
+ * Header file for library_web theme
  *
  * @package Archon
  * @author Paul Sorensen, originally adapted from "default" by Chris Rishel, Chris Prom, Kyle Fox
@@ -147,8 +147,9 @@ header('Content-type: text/html; charset=UTF-8');
       <div id='top'>
 
          <div id="logosearchwrapper">
-            <div id="logo"><a href="index.php" ><img src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/logo.gif" alt="logo" /></a><br/>Archives</div>
-            <div id="searchblock">
+
+		 <div id="sitetitleblock"><a href="index.php">Holdings Database of the University of Illnois Archives</a></div>
+			<div id="searchblock">
                <form action="index.php" accept-charset="UTF-8" method="get" onsubmit="if(!this.q.value) { alert('Please enter search terms.'); return false; } else { return true; }">
                   <div>
                      <input type="hidden" name="p" value="core/search" />
@@ -158,91 +159,43 @@ header('Content-type: text/html; charset=UTF-8');
                      if(defined('PACKAGE_COLLECTIONS') && CONFIG_COLLECTIONS_SEARCH_BOX_LISTS)
                      {
                         ?>
-                        <input type="hidden" name="content" value="1" />
+                        <input type="hidden" name="content" value="0" />
                         <?php
                      }
                      ?>
                   </div></form></div>
 
          </div>
-         <div id="researchblock">
-
-            <?php
-            if($_ARCHON->Security->isAuthenticated())
-            {
-               echo("<span class='bold'>Welcome, " . $_ARCHON->Security->Session->User->toString() . "</span><br/>");
-
-               $logoutURI = preg_replace('/(&|\\?)f=([\\w])*/', '', $_SERVER['REQUEST_URI']);
-               $Logout = (encoding_strpos($logoutURI, '?') !== false) ? '&amp;f=logout' : '?f=logout';
-               $strLogout = encode($logoutURI, ENCODE_HTML) . $Logout;
-               echo("<a href='$strLogout'>Logout</a>");
-            }
-            elseif($_ARCHON->config->ForceHTTPS)
-            {
-               echo("<a href='index.php?p=core/login&amp;go='>Log In</a>");
-            }
-            else
-            {
-               echo("<a href='#' onclick='$(window).scrollTo(\"#archoninfo\"); if($(\"#userlogin\").is(\":visible\")) $(\"#loginlink\").html(\"Log In\"); else $(\"#loginlink\").html(\"Hide\"); $(\"#userlogin\").slideToggle(\"normal\"); $(\"#ArchonLoginField\").focus(); return false;'>Log In</a>");
-            }
-
-            if(!$_ARCHON->Security->userHasAdministrativeAccess())
-            {
-               $emailpage = defined('PACKAGE_COLLECTIONS') ? "collections/research" : "core/contact";
-
-               echo(" | <a href='?p={$emailpage}&amp;f=email&amp;referer=" . urlencode($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) . "'>Contact Us</a>");
-               if($_ARCHON->Security->isAuthenticated())
-               {
-                  echo(" | <a href='?p=core/account&amp;f=account'>My Account</a>");
-               }
-               if(defined('PACKAGE_COLLECTIONS'))
-               {
-                  $_ARCHON->Security->Session->ResearchCart->getCart();
-                  $EntryCount = $_ARCHON->Security->Session->ResearchCart->getCartCount();
-                  $class = $_ARCHON->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS ? '' : 'hidewhenempty';
-                  $hidden = ($_ARCHON->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS || $EntryCount) ? '' : "style='display:none'";
-
-                  echo("<span id='viewcartlink' class='$class' $hidden>| <a href='?p=collections/research&amp;f=cart&amp;referer=" . urlencode($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) . "'>View Cart (<span id='cartcount'>$EntryCount</span>)</a></span>");
-               }
-            }
-            ?>
-         </div>
-
-
-
-         <?php
+         
+			<?php
          $arrP = explode('/', $_REQUEST['p']);
          $TitleClass = $arrP[0] == 'collections' && $arrP[1] != 'classifications' ? 'currentBrowseLink' : 'browseLink';
          $ClassificationsClass = $arrP[1] == 'classifications' ? 'currentBrowseLink' : 'browseLink';
          $SubjectsClass = $arrP[0] == 'subjects' ? 'currentBrowseLink' : 'browseLink';
          $CreatorsClass = $arrP[0] == 'creators' ? 'currentBrowseLink' : 'browseLink';
          $DigitalLibraryClass = $arrP[0] == 'digitallibrary' ? 'currentBrowseLink' : 'browseLink';
-         $AccessionsClass = $arrP[0] == 'accessions' ? 'currentBrowseLink' : 'browseLink';
          ?>
+
          <div id="browsebyblock">
-            <span id="browsebyspan">
-               Browse:
-            </span>
-            <span class="<?php echo($TitleClass); ?>">
-               <a href="?p=collections/collections" onclick="js_highlighttoplink(this.parentNode); return true;">Titles</a>
+            <div id="browseblockcontent">
+            <span class="<?php echo($ClassificationsClass); ?>">
+               <a href="?p=collections/classifications" onclick="js_highlighttoplink(this.parentNode); return true;">Campus Units/Record Groups</a>
             </span>
 
+            <span class="<?php echo($TitleClass); ?>">
+               <a href="?p=collections/collections" onclick="js_highlighttoplink(this.parentNode); return true;">Physical Collection A-Z</a>
+            </span>
+			 <span class="<?php echo($DigitalLibraryClass); ?>">
+               <a href="?p=digitallibrary/digitallibrary" onclick="js_highlighttoplink(this.parentNode); return true;">Digital Materials A-Z</a>
+            </span>
+           
             <span class="<?php echo($SubjectsClass); ?>">
-               <a href="?p=subjects/subjects" onclick="js_highlighttoplink(this.parentNode); return true;">Subjects</a>
+               <a href="?p=subjects/subjects" onclick="js_highlighttoplink(this.parentNode); return true;">Subject Headings</a>
             </span>
             <span class="<?php echo($CreatorsClass); ?>">
-               <a href="?p=creators/creators" onclick="js_highlighttoplink(this.parentNode); return true;">Names</a>
+               <a href="?p=creators/creators" onclick="js_highlighttoplink(this.parentNode); return true;">Name Authority Files</a>
             </span>
-            <span class="<?php echo($DigitalLibraryClass); ?>">
-               <a href="?p=digitallibrary/digitallibrary" onclick="js_highlighttoplink(this.parentNode); return true;">Images</a>
-            </span>
-            <span class="<?php echo($ClassificationsClass); ?>">
-               <a href="?p=collections/classifications" onclick="js_highlighttoplink(this.parentNode); return true;">Campus Units</a>
-            </span>
-            <span class="<?php echo($AccessionsClass); ?>">
-               <a href="?p=accessions/accessions" onclick="js_highlighttoplink(this.parentNode); return true;">Accessions</a>
-            </span>
-
+           </div>
          </div>
       </div>
 

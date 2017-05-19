@@ -107,8 +107,7 @@ if (!empty($objDigitalContent->Files))
          echo("</span>");
       }
 
-      echo ("<br/><span class='digcontentrequest'><a href='?p=digitallibrary/request&amp;id=" . $_REQUEST['id'] . "&amp;fileid=" . $objFile->ID . "&amp;referer=" . urlencode($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) . "'>Request hi-res copy</a></span>");
-
+echo ("<br/><span class='digcontentrequest'><a href='https://archives.library.illinois.edu/email-ahx.php?this_page=https://archives.library.illinois.edu". urlencode($_SERVER['REQUEST_URI'])."'>Email us to request a hi-resolution copy.</a></span>");
 
       echo("<br/><br/></div>");
    }

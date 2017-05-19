@@ -31,3 +31,9 @@ config.inc.php
 ehthumbs.db
 Icon?
 Thumbs.db
+
+
+# OTHER STUFF #
+#
+github
+github.pub
