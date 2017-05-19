@@ -868,7 +868,7 @@ function get_enabled_compression_extensions()
  */
 function is_natural($var)
 {
-   return (strval(intval($var)) == strval($var)) && ($var >= 0);
+   return (is_numeric($var) && intval($var) == $var && $var >= 0);
 }
 
 function js_array($array, $quotes = true)
@@ -1061,8 +1061,15 @@ if(extension_loaded('iconv'))
 {
    $_iconvLoaded = true;
 
-   iconv_set_encoding('input_encoding', 'UTF-8');
-   iconv_set_encoding('output_encoding', 'UTF-8');
-   iconv_set_encoding('internal_encoding', 'UTF-8');
+   if (version_compare(PHP_VERSION, '5.6', '>='))
+   {
+      @ini_set('default_charset', 'UTF-8');
+   }
+   else
+   {
+      iconv_set_encoding('input_encoding', 'UTF-8');
+      iconv_set_encoding('output_encoding', 'UTF-8');
+      iconv_set_encoding('internal_encoding', 'UTF-8');
+   }
 }
 

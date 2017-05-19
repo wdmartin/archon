@@ -57,7 +57,7 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
 
 
 
-   foreach($arrCreators as $objCreator)
+   foreach((array)$arrCreators as $objCreator)
    {
       $_REQUEST['id'] = $objCreator->ID;
       $_REQUEST['output'] = formatFileName($objCreator->getString('Name',0,false,false));
@@ -164,7 +164,8 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
 
    // deliver the zip file
    $fp = fopen("$tmp_zip","r");
-   echo fpassthru($fp);
+   if (is_resource($fp))
+      echo fpassthru($fp);
 
    // clean up the tmp zip file
    exec("rm $tmp_zip");

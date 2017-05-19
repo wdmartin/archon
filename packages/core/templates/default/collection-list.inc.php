@@ -93,7 +93,7 @@ function getCollectioncreators()
     $result = $_ARCHON->mdb2->query($query);
 
 
-    if(PEAR::isError($result))
+    if(pear_isError($result))
     {
         trigger_error($result->getMessage(), E_USER_ERROR);
     }
@@ -119,7 +119,7 @@ function getCollectionSubjects()
     $result = $_ARCHON->mdb2->query($query);
 
 
-    if(PEAR::isError($result))
+    if(pear_isError($result))
     {
         trigger_error($result->getMessage(), E_USER_ERROR);
     }
@@ -144,7 +144,7 @@ function getCollectionLanguages()
     $result = $_ARCHON->mdb2->query($query);
 
 
-    if(PEAR::isError($result))
+    if(pear_isError($result))
     {
         trigger_error($result->getMessage(), E_USER_ERROR);
     }
@@ -181,7 +181,7 @@ function getCollectionlocations()
     $result = $_ARCHON->mdb2->query($query);
 
 
-    if(PEAR::isError($result))
+    if(pear_isError($result))
     {
         trigger_error($result->getMessage(), E_USER_ERROR);
     }

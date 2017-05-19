@@ -42,7 +42,7 @@ function getRelatedCreators($item)
         $query = "SELECT RelatedCreatorID,CreatorRelationshipTypeID, Description FROM tblCreators_CreatorCreatorIndex WHERE CreatorID=". $item->ID;
         $result = $_ARCHON->mdb2->query($query);
 
-        if(PEAR::isError($result))
+        if(pear_isError($result))
         {
             trigger_error($result->getMessage(), E_USER_ERROR);
         }

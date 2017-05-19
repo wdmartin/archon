@@ -107,7 +107,7 @@ function getCollectionContentcreators()
     $query = "SELECT CollectionContentID,CreatorID FROM tblCollections_CollectionContentCreatorIndex";
     $result = $_ARCHON->mdb2->query($query);
 
-    if(PEAR::isError($result))
+    if(pear_isError($result))
     {
         trigger_error($result->getMessage(), E_USER_ERROR);
     }
@@ -132,7 +132,7 @@ function getCollectionContentSubjects()
     $result = $_ARCHON->mdb2->query($query);
 
 
-    if(PEAR::isError($result))
+    if(pear_isError($result))
     {
         trigger_error($result->getMessage(), E_USER_ERROR);
     }

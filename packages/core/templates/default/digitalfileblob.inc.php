@@ -45,7 +45,7 @@ $ID = $_REQUEST['fileid'];
 
 
 
-    if(PEAR::isError($result))
+    if(pear_isError($result))
     {
         trigger_error($result->getMessage(), E_USER_ERROR);
     }

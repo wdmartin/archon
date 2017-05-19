@@ -39,7 +39,7 @@ abstract class Core_User
          $query = "UPDATE tblCore_Users SET Pending = 0, PendingHash = NULL WHERE ID = ?";
          $prep = $_ARCHON->mdb2->prepare($query, array('integer'), MDB2_PREPARE_MANIP);
          $affected = $prep->execute(array($this->ID));
-         if (PEAR::isError($affected))
+         if (pear_isError($affected))
          {
             trigger_error($affected->getMessage(), E_USER_ERROR);
          }
@@ -123,7 +123,7 @@ abstract class Core_User
       {
          $query = "SELECT Value FROM tblCore_Configuration WHERE Directive = 'SA Password'";
          $result = $_ARCHON->mdb2->query($query);
-         if (PEAR::isError($result))
+         if (pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -132,7 +132,11 @@ abstract class Core_User
          $this->Login = 'sa';
          $this->PasswordHash = $row['Value'];
          $this->DisplayName = 'Super Administrator';
-         $this->Usergroups[]->DefaultPermissions = FULL_CONTROL | DELETE | UPDATE | ADD | READ;
+         isset($this->Usergroups) or
+            $this->Usergroups = array();
+         $o = new stdClass();
+         $o->DefaultPermissions = FULL_CONTROL | DELETE | UPDATE | ADD | READ;
+         $this->Usergroups[] = $o;
          $this->IsAdminUser = true;
          $this->Locked = 0;
          $this->Pending = 0;
@@ -213,7 +217,7 @@ abstract class Core_User
          $prep = $_ARCHON->mdb2->prepare("SELECT * FROM tblCore_UserPermissions WHERE UserID = ?", 'integer', MDB2_PREPARE_RESULT);
          $result = $prep->execute($this->ID);
       }
-      if (PEAR::isError($result))
+      if (pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -257,7 +261,7 @@ abstract class Core_User
       $prep = $_ARCHON->mdb2->prepare($query, 'integer', MDB2_PREPARE_RESULT);
       $result = $prep->execute($this->ID);
 
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -313,7 +317,7 @@ abstract class Core_User
       $prep = $_ARCHON->mdb2->prepare($query, 'integer', MDB2_PREPARE_RESULT);
       $result = $prep->execute($this->ID);
 
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -368,7 +372,7 @@ abstract class Core_User
       $query = "SELECT tblCore_Usergroups.* FROM tblCore_Usergroups JOIN tblCore_UserUsergroupIndex ON tblCore_Usergroups.ID = tblCore_UserUsergroupIndex.UsergroupID WHERE tblCore_UserUsergroupIndex.UserID = ? ORDER BY tblCore_Usergroups.Usergroup";
       $prep = $_ARCHON->mdb2->prepare($query, 'integer', MDB2_PREPARE_RESULT);
       $result = $prep->execute($this->ID);
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -423,7 +427,7 @@ abstract class Core_User
       $prep = $_ARCHON->mdb2->prepare($query, 'integer', MDB2_PREPARE_RESULT);
       $result = $prep->execute($this->ID);
 
-      if(PEAR::isError($result))
+      if(pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -481,7 +485,7 @@ abstract class Core_User
       $query = "SELECT tblCore_UserProfileFields.*, tblCore_UserUserProfileFieldIndex.Value as Value FROM tblCore_UserProfileFields JOIN tblCore_UserUserProfileFieldIndex ON tblCore_UserProfileFields.ID = tblCore_UserUserProfileFieldIndex.UserProfileFieldID JOIN tblCore_UserProfileFieldCategories ON tblCore_UserProfileFields.UserProfileFieldCategoryID = tblCore_UserProfileFieldCategories.ID WHERE tblCore_UserUserProfileFieldIndex.UserID = ? ORDER BY tblCore_UserProfileFieldCategories.DisplayOrder, tblCore_UserProfileFieldCategories.UserProfileFieldCategory, tblCore_UserProfileFields.DisplayOrder, tblCore_UserProfileFields.PackageID, tblCore_UserProfileFields.UserProfileField";
       $prep = $_ARCHON->mdb2->prepare($query, 'integer', MDB2_PREPARE_RESULT);
       $result = $prep->execute($this->ID);
-      if (PEAR::isError($result))
+      if (pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -616,7 +620,7 @@ abstract class Core_User
          $prep = $_ARCHON->mdb2->prepare($query, array('integer', 'integer'), MDB2_PREPARE_MANIP);
       }
       $affected = $prep->execute(array($LanguageID, $this->ID));
-      if (PEAR::isError($affected))
+      if (pear_isError($affected))
       {
          trigger_error($affected->getMessage(), E_USER_ERROR);
       }
@@ -750,7 +754,7 @@ abstract class Core_User
          $prep = $_ARCHON->mdb2->prepare($query, array('integer', 'integer', 'integer'), MDB2_PREPARE_MANIP);
       }
       $affected = $prep->execute(array($this->ID, $ModuleID, $Permissions));
-      if (PEAR::isError($affected))
+      if (pear_isError($affected))
       {
          trigger_error($affected->getMessage(), E_USER_ERROR);
       }
@@ -843,7 +847,7 @@ abstract class Core_User
          }
          $affected = $insertPrep->execute(array($this->ID, $UserProfileFieldID, $Value));
 
-         if(PEAR::isError($affected))
+         if(pear_isError($affected))
          {
             trigger_error($affected->getMessage(), E_USER_ERROR);
 
@@ -1042,7 +1046,7 @@ abstract class Core_User
          $prep = $_ARCHON->mdb2->prepare($query, array('integer', 'integer'), MDB2_PREPARE_MANIP);
       }
       $affected = $prep->execute(array($this->ID, $ModuleID));
-      if (PEAR::isError($affected))
+      if (pear_isError($affected))
       {
          trigger_error($affected->getMessage(), E_USER_ERROR);
       }

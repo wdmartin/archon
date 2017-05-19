@@ -95,7 +95,7 @@ function getDigitalContentCreator()
     $result = $_ARCHON->mdb2->query($query);
 
 
-    if(PEAR::isError($result))
+    if(pear_isError($result))
     {
         trigger_error($result->getMessage(), E_USER_ERROR);
     }
@@ -123,7 +123,7 @@ function getDigitalContentSubjects()
     $result = $_ARCHON->mdb2->query($query);
 
 
-    if(PEAR::isError($result))
+    if(pear_isError($result))
     {
         trigger_error($result->getMessage(), E_USER_ERROR);
     }
@@ -150,7 +150,7 @@ function getDigitalContentFile()
     $result = $_ARCHON->mdb2->query($query);
 
 
-    if(PEAR::isError($result))
+    if(pear_isError($result))
     {
         trigger_error($result->getMessage(), E_USER_ERROR);
     }
@@ -178,7 +178,7 @@ function getDigitalContentLanguage()
     $result = $_ARCHON->mdb2->query($query);
 
 
-    if(PEAR::isError($result))
+    if(pear_isError($result))
     {
         trigger_error($result->getMessage(), E_USER_ERROR);
     }

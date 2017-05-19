@@ -21,7 +21,7 @@ abstract class Creators_Archon
 
          $query = "SELECT ID FROM tblCreators_Creators WHERE (Name LIKE '0%' OR Name LIKE '1%' OR Name LIKE '2%' OR Name LIKE '3%' OR Name LIKE '4%' OR Name LIKE '5%' OR Name LIKE '6%' OR Name LIKE '7%' OR Name LIKE '8%' OR Name LIKE '9%')";
          $result = $this->mdb2->query($query);
-         if (PEAR::isError($result))
+         if (pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -52,7 +52,7 @@ abstract class Creators_Archon
       {
          $query = "SELECT ID FROM tblCreators_Creators";
          $result = $this->mdb2->query($query);
-         if (PEAR::isError($result))
+         if (pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -245,7 +245,7 @@ abstract class Creators_Archon
       $this->mdb2->setLimit(1);
       $prep = $this->mdb2->prepare("SELECT ID FROM tblCreators_CreatorSources WHERE SourceAbbreviation LIKE ?", 'text', MDB2_PREPARE_RESULT);
       $result = $prep->execute($String);
-      if (PEAR::isError($result))
+      if (pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -278,7 +278,7 @@ abstract class Creators_Archon
       $this->mdb2->setLimit(1);
       $prep = $this->mdb2->prepare("SELECT ID FROM tblCreators_Creators WHERE Name LIKE ?", 'text', MDB2_PREPARE_RESULT);
       $result = $prep->execute($String);
-      if (PEAR::isError($result))
+      if (pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -483,7 +483,7 @@ abstract class Creators_Archon
       }
 
       $result = $currentPreps[$strClassName]->execute($Object->ID);
-      if (PEAR::isError($result))
+      if (pear_isError($result))
       {
          trigger_error($result->getMessage(), E_USER_ERROR);
       }
@@ -576,7 +576,7 @@ abstract class Creators_Archon
       {
 
          $result = $existPrep->execute($newRelatedCreatorID);
-         if (PEAR::isError($result))
+         if (pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -594,7 +594,7 @@ abstract class Creators_Archon
 
 
          $result = $checkPreps[$strClassName]->execute(array($Object->ID, $newRelatedCreatorID));
-         if (PEAR::isError($result))
+         if (pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -621,13 +621,13 @@ abstract class Creators_Archon
 
 
          $affected = $insertPreps[$strClassName]->execute(array($Object->ID, $newRelatedCreatorID, $primaryCreator));
-         if (PEAR::isError($affected))
+         if (pear_isError($affected))
          {
             trigger_error($affected->getMessage(), E_USER_ERROR);
          }
 
          $result = $checkPreps[$strClassName]->execute(array($Object->ID, $newRelatedCreatorID));
-         if (PEAR::isError($result))
+         if (pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -652,7 +652,7 @@ abstract class Creators_Archon
 
 
          $result = $checkPreps[$strClassName]->execute(array($Object->ID, $newUnrelatedCreatorID));
-         if (PEAR::isError($result))
+         if (pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -676,13 +676,13 @@ abstract class Creators_Archon
          }
 
          $affected = $deletePreps[$strClassName]->execute(array($Object->ID, $newUnrelatedCreatorID));
-         if (PEAR::isError($affected))
+         if (pear_isError($affected))
          {
             trigger_error($affected->getMessage(), E_USER_ERROR);
          }
 
          $result = $checkPreps[$strClassName]->execute(array($Object->ID, $newUnrelatedCreatorID));
-         if (PEAR::isError($result))
+         if (pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -711,7 +711,7 @@ abstract class Creators_Archon
       {
 
          $result = $checkPreps[$strClassName]->execute(array($Object->ID, $newPrimaryCreatorID));
-         if (PEAR::isError($result))
+         if (pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -730,7 +730,7 @@ abstract class Creators_Archon
          }
 
          $affected = $updatePreps[$strClassName]->execute(array(1, $Object->ID, $newPrimaryCreatorID));
-         if (PEAR::isError($affected))
+         if (pear_isError($affected))
          {
             trigger_error($affected->getMessage(), E_USER_ERROR);
          }
@@ -745,7 +745,7 @@ abstract class Creators_Archon
       {
 
          $result = $checkPreps[$strClassName]->execute(array($Object->ID, $newSecondaryCreatorID));
-         if (PEAR::isError($result))
+         if (pear_isError($result))
          {
             trigger_error($result->getMessage(), E_USER_ERROR);
          }
@@ -764,7 +764,7 @@ abstract class Creators_Archon
          }
 
          $affected = $updatePreps[$strClassName]->execute(array(0, $Object->ID, $newSecondaryCreatorID));
-         if (PEAR::isError($affected))
+         if (pear_isError($affected))
          {
             trigger_error($affected->getMessage(), E_USER_ERROR);
          }

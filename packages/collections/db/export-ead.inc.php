@@ -129,7 +129,7 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
 
 
 
-   foreach($arrCollections as $objCollection)
+   foreach((array)$arrCollections as $objCollection)
    {
       $_REQUEST['id'] = $objCollection->ID;
       $_REQUEST['output'] = formatFileName($objCollection->getString('SortTitle',0,false,false));
@@ -243,7 +243,8 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
 
    // deliver the zip file
    $fp = fopen("$tmp_zip","r");
-   echo fpassthru($fp);
+   if (is_resource($fp))
+      echo fpassthru($fp);
 
    // clean up the tmp zip file
    exec("rm $tmp_zip");

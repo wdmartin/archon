@@ -192,10 +192,9 @@ abstract class ArchonObject
       {
          foreach($_ARCHON->Mixins[get_class($this)]->Variables as $VariableName => $DefaultValue)
          {
-            $val = $ID_or_Row[strtolower($VariableName)];
-            if($isRow && isset($val))
+            if($isRow && isset($ID_or_Row[strtolower($VariableName)]))
             {
-               $this->$VariableName = $val;
+               $this->$VariableName = $ID_or_Row[strtolower($VariableName)];
             }
             elseif(encoding_strtoupper($VariableName) != 'ID' && !isset($this->$VariableName))
             {
@@ -229,6 +228,8 @@ abstract class ArchonObject
 
       if(!empty($_ARCHON->Mixins[get_class($this)]->Methods[$method]->Classes))
       {
+         isset($stackmember) or
+            $stackmember = new stdClass();
          $stackmember->Method = $method;
          $stackmember->Classes = $_ARCHON->Mixins[get_class($this)]->Methods[$method]->Classes;
          $_ARCHON->Callstack[] = $stackmember;
@@ -277,9 +278,10 @@ abstract class ArchonObject
       else
       {
          $backtrace = debug_backtrace();
-         echo('<b>Warning</b>: Call to undefined function <b>' . get_class($this) . '::' . $method .
-                 '</b> in <b>' . $backtrace[1]['file'] . '</b> on line <b>' . $backtrace[1]['line'] . "</b><br />\n");
-
+         $message =
+            'Warning: Call to undefined function ' . get_class($this) . '::' . $method .
+            ' in ' . $backtrace[1]['file'] . ' on line ' . $backtrace[1]['line'];
+         error_log($message);
          return NULL;
       }
    }
