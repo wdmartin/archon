@@ -3628,7 +3628,7 @@ abstract class Core_Archon
       }
 
       isset($this->Mixins) or
-         $this->Mixins = [];
+         $this->Mixins = array();
       isset($this->Mixins[$ClassName]) or
          $this->Mixins[$ClassName] = new stdClass();
       isset($this->Mixins[$ClassName]->Methods) or
