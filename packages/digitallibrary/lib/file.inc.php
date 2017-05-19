@@ -747,7 +747,16 @@ abstract class DigitalLibrary_File
       static $preps = array();
       if(!isset($preps[$this->fpointer]))
       {
-         $query = "SELECT HEX(SUBSTRING({$_ARCHON->mdb2->quoteIdentifier($this->fpointer)}, ?, ?)) as FilePacket FROM tblDigitalLibrary_Files WHERE ID = ?";
+         
+        if($_ARCHON->db->ServerType == 'MySQL')
+		{
+			$query = "SELECT HEX(SUBSTRING({$_ARCHON->mdb2->quoteIdentifier($this->fpointer)}, ?, ?)) as FilePacket FROM tblDigitalLibrary_Files WHERE ID = ?";
+        }
+        else 
+        {
+			$query = "SELECT SUBSTRING({$_ARCHON->mdb2->quoteIdentifier($this->fpointer)}, ?, ?) as FilePacket FROM tblDigitalLibrary_Files WHERE ID = ?";
+		} 
+         
          $preps[$this->fpointer] = $_ARCHON->mdb2->prepare($query, array('integer', 'integer', 'integer'), MDB2_PREPARE_RESULT);
          if(pear_isError($preps[$this->fpointer]))
          {
@@ -765,9 +774,18 @@ abstract class DigitalLibrary_File
 
       if($row['FilePacket'])
       {
-         $data = pack('H*', $row['FilePacket']);
-         $this->fposition += strlen($data);
-         return $data;
+   
+   		if($_ARCHON->db->ServerType == 'MySQL')
+		{
+			$data = pack('H*', $row['FilePacket']);
+    	    $this->fposition += strlen($data);
+       		return $data;
+		}
+        else 
+  		{ 
+        $this->fposition += strlen($row['FilePacket']);
+        return $row['FilePacket'];
+        }
       }
       else
       {
