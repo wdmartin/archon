@@ -147,7 +147,8 @@ header('Content-type: text/html; charset=UTF-8');
       <div id='top'>
 
          <div id="logosearchwrapper">
-            <div id="logo"><a href="index.php" ><img src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/logo.gif" alt="logo" /></a><br/>Archives</div>
+
+		 <div id="sitetitleblock"><a href="index.php">Holdings Database of the University of Illnois Archives</a></div>
 			<div id="searchblock">
                <form action="index.php" accept-charset="UTF-8" method="get" onsubmit="if(!this.q.value) { alert('Please enter search terms.'); return false; } else { return true; }">
                   <div>
@@ -158,14 +159,12 @@ header('Content-type: text/html; charset=UTF-8');
                      if(defined('PACKAGE_COLLECTIONS') && CONFIG_COLLECTIONS_SEARCH_BOX_LISTS)
                      {
                         ?>
-                        <input type="hidden" name="content" value="1" />
+                        <input type="hidden" name="content" value="0" />
                         <?php
                      }
                      ?>
                   </div></form></div>
 
-			<div id="sitetitleblock">University Archives: Holdings Database</div>
-            
          </div>
          
 			<?php
@@ -178,26 +177,25 @@ header('Content-type: text/html; charset=UTF-8');
          ?>
 
          <div id="browsebyblock">
-            <span id="browsebyspan">
-               Browse:
-            </span>
-            <span class="<?php echo($TitleClass); ?>">
-               <a href="?p=collections/collections" onclick="js_highlighttoplink(this.parentNode); return true;">Titles</a>
+            <div id="browseblockcontent">
+            <span class="<?php echo($ClassificationsClass); ?>">
+               <a href="?p=collections/classifications" onclick="js_highlighttoplink(this.parentNode); return true;">Campus Units/Record Groups</a>
             </span>
 
+            <span class="<?php echo($TitleClass); ?>">
+               <a href="?p=collections/collections" onclick="js_highlighttoplink(this.parentNode); return true;">Physical Collection A-Z</a>
+            </span>
+			 <span class="<?php echo($DigitalLibraryClass); ?>">
+               <a href="?p=digitallibrary/digitallibrary" onclick="js_highlighttoplink(this.parentNode); return true;">Digital Materials A-Z</a>
+            </span>
+           
             <span class="<?php echo($SubjectsClass); ?>">
-               <a href="?p=subjects/subjects" onclick="js_highlighttoplink(this.parentNode); return true;">Subjects</a>
+               <a href="?p=subjects/subjects" onclick="js_highlighttoplink(this.parentNode); return true;">Subject Headings</a>
             </span>
             <span class="<?php echo($CreatorsClass); ?>">
-               <a href="?p=creators/creators" onclick="js_highlighttoplink(this.parentNode); return true;">Names</a>
+               <a href="?p=creators/creators" onclick="js_highlighttoplink(this.parentNode); return true;">Name Authority Files</a>
             </span>
-            <span class="<?php echo($DigitalLibraryClass); ?>">
-               <a href="?p=digitallibrary/digitallibrary" onclick="js_highlighttoplink(this.parentNode); return true;">Images</a>
-            </span>
-            <span class="<?php echo($ClassificationsClass); ?>">
-               <a href="?p=collections/classifications" onclick="js_highlighttoplink(this.parentNode); return true;">Campus Units</a>
-            </span>
-
+           </div>
          </div>
       </div>
 
