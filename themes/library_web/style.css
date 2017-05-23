@@ -272,10 +272,19 @@ img.dl
 	color:#eceff1;
 }
 
-#sitetitleblock a:visited, #sitetitleblock a:hover {
-color:#eceff1;
-background:#5274ac
+#sitetitleblock a:link, #sitetitleblock a:active, #sitetitleblock a:visited {
+	color:#eceff1;
+
 }
+
+
+
+#sitetitleblock a:hover {
+	background:#fbdb7a;
+	color:#10375D;
+}
+
+
 #searchblock {
 	background:#5274ac;
 	background-position:bottom right;

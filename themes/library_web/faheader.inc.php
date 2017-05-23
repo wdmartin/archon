@@ -119,6 +119,7 @@ header('Content-type: text/html; charset=UTF-8');
       {
          $message = $_ARCHON->PublicInterface->Header->Message;
       } ?>
+      <script src="https://use.fontawesome.com/77e525f0e0.js"></script>
    </head>
    <body>
       <?php
@@ -132,7 +133,7 @@ header('Content-type: text/html; charset=UTF-8');
       ?>
       <div id='top'>
          <div id="logosearchwrapper">
-         <div id="sitetitleblock"><a href="index.php">Holdings Database of the University of Illnois Archives</a></div>
+         <div id="sitetitleblock"><a href="https://archives.library.illinois.edu">University of Illnois Archives</a> &ndash;> <a href="index.php">Holdings Database</a></div>
             <div id="searchblock">
                <form action="index.php" accept-charset="UTF-8" method="get" onsubmit="if(!this.q.value) { alert('Please enter search terms.'); return false; } else { return true; }">
                   <div>
@@ -167,17 +168,17 @@ header('Content-type: text/html; charset=UTF-8');
             </span>
 
             <span class="<?php echo($TitleClass); ?>">
-               <a href="?p=collections/collections" onclick="js_highlighttoplink(this.parentNode); return true;">Physical Collection A-Z</a>
+               <a href="?p=collections/collections" onclick="js_highlighttoplink(this.parentNode); return true;">Physical Collections: A-Z</a>
             </span>
 			 <span class="<?php echo($DigitalLibraryClass); ?>">
-               <a href="?p=digitallibrary/digitallibrary" onclick="js_highlighttoplink(this.parentNode); return true;">Digital Materials A-Z</a>
+               <a href="?p=digitallibrary/digitallibrary" onclick="js_highlighttoplink(this.parentNode); return true;">Digital Materials: A-Z</a>
             </span>
            
             <span class="<?php echo($SubjectsClass); ?>">
                <a href="?p=subjects/subjects" onclick="js_highlighttoplink(this.parentNode); return true;">Subject Headings</a>
             </span>
             <span class="<?php echo($CreatorsClass); ?>">
-               <a href="?p=creators/creators" onclick="js_highlighttoplink(this.parentNode); return true;">Name Authority Files</a>
+               <a href="?p=creators/creators" onclick="js_highlighttoplink(this.parentNode); return true;">Record Creators</a>
             </span>
            </div>
          </div>
