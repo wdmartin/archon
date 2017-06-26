@@ -4844,11 +4844,11 @@ abstract class Core_Archon
    /**
     * @var string
     */
-   public $ReleaseDate = '2017.5.19';
+   public $ReleaseDate = '2017.6.26';
    /**
     * @var string
     */
-   public $Revision = '3 beta';
+   public $Revision = '3';
    /**
     * Repository object containing the default repository
     * (unless specified otherwise by setrepositoryid
