@@ -15,6 +15,8 @@ if($_ARCHON->Security->isAuthenticated() && $_ARCHON->Security->userHasAdministr
 
 research_initialize();
 
+// TODO: clean GET request items
+
 function research_initialize()
 {
    if($_REQUEST['f'] == 'cart')

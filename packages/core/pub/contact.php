@@ -16,6 +16,8 @@ if($_ARCHON->Security->isAuthenticated() && $_ARCHON->Security->userHasAdministr
 
 contact_initialize();
 
+// TODO: clean GET request items
+
 function contact_initialize()
 {
 	if(!isset($_REQUEST['f']))
