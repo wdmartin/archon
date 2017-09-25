@@ -121,7 +121,6 @@ function contact_email()
 
 	$inputs = array();
 
-	// TODO: sanitize for XSS?
 	$inputs[] = array(
 		'strInputLabel' => "<label for=\"name\">$strFromName:</label>",
 		'strInputElement' => "<input type=\"text\" name=\"FromName\" id=\"name\" size=\"30\" value=\"$strName\" />",
@@ -129,7 +128,6 @@ function contact_email()
 		'template' => 'FieldGeneral',
 	);
 
-    // TODO: sanitize for XSS?
 	$inputs[] = array(
 		'strInputLabel' => "<label for=\"email\">$strFromAddress:</label>",
 		'strInputElement' => "<input type=\"text\" name=\"FromAddress\" id=\"email\" size=\"25\" value=\"$strFrom\" />",
@@ -137,7 +135,6 @@ function contact_email()
 		'template' => 'FieldGeneral',
 	);
 
-    // TODO: sanitize for XSS?
 	$inputs[] = array(
 		'strInputLabel' => "<label for=\"phone\">$strFromPhone:</label>\n",
 		'strInputElement' => "<input type=\"text\" name=\"FromPhone\" id=\"phone\" size=\"20\" value=\"$strPhone\" />",
@@ -145,7 +142,6 @@ function contact_email()
 		'template' => 'FieldGeneral',
 	);
 
-    // TODO: sanitize for XSS?
 	$strEncodedSubject = encode($_REQUEST['subject'], ENCODE_HTML);
 	$inputs[] = array(
 		'strInputLabel' => "<label for=\"subject\">$strSubject:</label>",
@@ -154,7 +150,6 @@ function contact_email()
 		'template' => 'FieldGeneral',
 	);
 
-    // TODO: sanitize for XSS?
 	$strEncodedMessage = encode($_REQUEST['message'], ENCODE_HTML);
 	$inputs[] = array(
 		'strInputLabel' => "<label for=\"message\">$strMessage:</label>",
