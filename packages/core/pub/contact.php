@@ -16,7 +16,6 @@ if($_ARCHON->Security->isAuthenticated() && $_ARCHON->Security->userHasAdministr
 
 contact_initialize();
 
-// TODO: clean GET request items
 
 function contact_initialize()
 {
@@ -67,9 +66,9 @@ function contact_email()
     $_ARCHON->PublicInterface->Title = $strEmailTitle;
     $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title);
 
-    $in_referer = $_REQUEST['referer'] ? $_REQUEST['referer'] : urlencode($_REQUEST['HTTP_REFERER']);
+    $in_referer = $_REQUEST['referer'] ? htmlspecialchars($_REQUEST['referer']) : urlencode($_REQUEST['HTTP_REFERER']);
 
-    $repositoryid = $_REQUEST['repositoryid'] ? $_REQUEST['repositoryid'] : 0;
+    $repositoryid = $_REQUEST['repositoryid'] ? intval($_REQUEST['repositoryid']) : 0;
 
 
 
@@ -111,6 +110,7 @@ function contact_email()
 
 	print "<form action=\"index.php\" accept-charset=\"UTF-8\" method=\"post\">\n";
 
+	// $in_referer, $query_string, and $repository id are sanitized for XSS at assignment
 	$form = "<input type=\"hidden\" name=\"f\" value=\"sendemail\" />\n";
 	$form .= "<input type=\"hidden\" name=\"p\" value=\"core/contact\" />\n";
 	$form .= "<input type=\"hidden\" name=\"referer\" value=\"$in_referer\" />\n";
@@ -121,6 +121,7 @@ function contact_email()
 
 	$inputs = array();
 
+	// TODO: sanitize for XSS?
 	$inputs[] = array(
 		'strInputLabel' => "<label for=\"name\">$strFromName:</label>",
 		'strInputElement' => "<input type=\"text\" name=\"FromName\" id=\"name\" size=\"30\" value=\"$strName\" />",
@@ -128,6 +129,7 @@ function contact_email()
 		'template' => 'FieldGeneral',
 	);
 
+    // TODO: sanitize for XSS?
 	$inputs[] = array(
 		'strInputLabel' => "<label for=\"email\">$strFromAddress:</label>",
 		'strInputElement' => "<input type=\"text\" name=\"FromAddress\" id=\"email\" size=\"25\" value=\"$strFrom\" />",
@@ -135,6 +137,7 @@ function contact_email()
 		'template' => 'FieldGeneral',
 	);
 
+    // TODO: sanitize for XSS?
 	$inputs[] = array(
 		'strInputLabel' => "<label for=\"phone\">$strFromPhone:</label>\n",
 		'strInputElement' => "<input type=\"text\" name=\"FromPhone\" id=\"phone\" size=\"20\" value=\"$strPhone\" />",
@@ -142,6 +145,7 @@ function contact_email()
 		'template' => 'FieldGeneral',
 	);
 
+    // TODO: sanitize for XSS?
 	$strEncodedSubject = encode($_REQUEST['subject'], ENCODE_HTML);
 	$inputs[] = array(
 		'strInputLabel' => "<label for=\"subject\">$strSubject:</label>",
@@ -150,6 +154,7 @@ function contact_email()
 		'template' => 'FieldGeneral',
 	);
 
+    // TODO: sanitize for XSS?
 	$strEncodedMessage = encode($_REQUEST['message'], ENCODE_HTML);
 	$inputs[] = array(
 		'strInputLabel' => "<label for=\"message\">$strMessage:</label>",
@@ -175,6 +180,7 @@ function contact_email()
 
 
 
+// TODO: continue checking for XSS vulnerabilities from here
 
 
 function contact_exec()
