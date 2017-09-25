@@ -187,7 +187,7 @@ function research_email()
    $_ARCHON->PublicInterface->Title = $strEmailTitle;
    $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title);
 
-   $in_referer = $_REQUEST['referer'] ? $_REQUEST['referer'] : $_REQUEST['HTTP_REFERER'];
+   $in_referer = $_REQUEST['referer'] ? urlencode($_REQUEST['referer']) : urlencode($_REQUEST['HTTP_REFERER']);
 
 
    if(!$_ARCHON->PublicInterface->Templates['collections']['Email'])
