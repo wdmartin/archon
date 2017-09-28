@@ -15,7 +15,6 @@ if($_ARCHON->Security->isAuthenticated() && $_ARCHON->Security->userHasAdministr
 
 research_initialize();
 
-// TODO: clean GET request items
 
 function research_initialize()
 {
@@ -126,7 +125,7 @@ function research_cart()
    $_ARCHON->PublicInterface->Title = $strResearchTitle;
    $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title);
 
-   $in_referer = $_REQUEST['referer'] ? urlencode($_REQUEST['referer']) : urlencode($_REQUEST['HTTP_REFERER']);
+   $in_referer = $_REQUEST['referer'] ? htmlspecialchars($_REQUEST['referer']) : urlencode($_REQUEST['HTTP_REFERER']);
 
    if(!$_ARCHON->PublicInterface->Templates['collections']['Cart'])
    {
@@ -187,7 +186,7 @@ function research_email()
    $_ARCHON->PublicInterface->Title = $strEmailTitle;
    $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title);
 
-   $in_referer = $_REQUEST['referer'] ? urlencode($_REQUEST['referer']) : urlencode($_REQUEST['HTTP_REFERER']);
+   $in_referer = $_REQUEST['referer'] ? htmlspecialchars($_REQUEST['referer']) : urlencode($_REQUEST['HTTP_REFERER']);
 
 
    if(!$_ARCHON->PublicInterface->Templates['collections']['Email'])
