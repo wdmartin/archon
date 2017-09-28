@@ -110,7 +110,7 @@ function contact_email()
 
 	print "<form action=\"index.php\" accept-charset=\"UTF-8\" method=\"post\">\n";
 
-	// $in_referer, $query_string, and $repository id are sanitized for XSS at assignment
+	// $in_referer, $query_string, and $repositoryid are sanitized for XSS at assignment
 	$form = "<input type=\"hidden\" name=\"f\" value=\"sendemail\" />\n";
 	$form .= "<input type=\"hidden\" name=\"p\" value=\"core/contact\" />\n";
 	$form .= "<input type=\"hidden\" name=\"referer\" value=\"$in_referer\" />\n";

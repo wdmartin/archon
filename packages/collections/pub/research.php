@@ -126,7 +126,7 @@ function research_cart()
    $_ARCHON->PublicInterface->Title = $strResearchTitle;
    $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title);
 
-   $in_referer = $_REQUEST['referer'] ? $_REQUEST['referer'] : $_REQUEST['HTTP_REFERER'];
+   $in_referer = $_REQUEST['referer'] ? urlencode($_REQUEST['referer']) : urlencode($_REQUEST['HTTP_REFERER']);
 
    if(!$_ARCHON->PublicInterface->Templates['collections']['Cart'])
    {
@@ -222,13 +222,16 @@ function research_email()
    }
    $strPhone = $_REQUEST['fromphone'] ? encode($_REQUEST['fromphone'], ENCODE_HTML) : $strPhone;
    //$strPhone = encode($strPhone, ENCODE_HTML);
+
+    $query_string = htmlspecialchars($_SERVER['QUERY_STRING'], ENT_COMPAT, "UTF-8");
    ?>
    <form action="index.php" accept-charset="UTF-8" method="post">
       <div>
          <input type="hidden" name="f" value="sendemails" />
          <input type="hidden" name="p" value="collections/research" />
+          <?php // $in_referer and $query_string are sanitized for XSS at assignment ?>
          <input type="hidden" name="referer" value="<?php echo($in_referer); ?>" />
-         <input type="hidden" name="query_string" value="<?php echo($_SERVER['QUERY_STRING']); ?>" />
+         <input type="hidden" name="query_string" value="<?php echo($query_string); ?>" />
 
       </div>
 
@@ -256,7 +259,7 @@ function research_verify()
 
    $ArrivalTimestamp = strtotime($_REQUEST['arrivaldatestring']);
    $DepartureTimestamp = strtotime($_REQUEST['departuredatestring']);
-   $RepositoryID = $_REQUEST['repositoryid'];
+   $RepositoryID = intval($_REQUEST['repositoryid']);
 
    if(!$_ARCHON->Security->isAuthenticated())
    {
@@ -320,6 +323,7 @@ function research_verify()
    <form action="index.php" accept-charset="UTF-8" method="GET">
       <input type="hidden" name=f value="makeappointment" />
       <input type="hidden" name="p" value="collections/research" />
+       <?php // $RepositoryID is sanitized for XSS at assignment ?>
       <input type="hidden" id="RepositoryIDField" name="RepositoryID" value="<?php echo($RepositoryID); ?>" />
    <?php eval($_ARCHON->PublicInterface->Templates['collections']['Verify']); ?>
    </form>
