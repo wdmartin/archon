@@ -174,10 +174,6 @@ function contact_email()
 }
 
 
-
-// TODO: continue checking for XSS vulnerabilities from here
-
-
 function contact_exec()
 {
     global $_ARCHON;
