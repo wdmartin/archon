@@ -14,7 +14,8 @@ if(defined('E_DEPRECATED'))
 {
    // This is the recommended verbosity for production. If you are an Archon
    // developer, or you are debugging an Archon problem, set this to E_ALL.
-   error_reporting(E_ERROR | E_PARSE);
+   //error_reporting(E_ERROR | E_PARSE);
+	error_reporting(E_ALL ^ E_NOTICE);
 }
 else
 {
@@ -30,7 +31,12 @@ else
    require_once('cryptorblank.inc.php');
 }
 
-// Let core installer handle it's own includes.
+if(!isset($_REQUEST['p']))
+{
+	$_REQUEST['p'] = '';
+}
+
+// Let core installer handle its own includes.
 if($_REQUEST['p'] == 'install')
 {
    require_once('packages/core/install/install.php');

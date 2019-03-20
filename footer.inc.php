@@ -91,5 +91,5 @@ else
    <?php
 }
 $_ARCHON->Security->Session->close();
-$_ARCHON->mdb2->disconnect();
+$_ARCHON->pdo = null;
 ?>

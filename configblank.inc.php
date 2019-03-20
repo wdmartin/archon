@@ -9,6 +9,7 @@
  *
  *      $_ARCHON->db->ServerType
  *      $_ARCHON->db->ServerAddress
+ *      $_ARCHON->db->ServerPort
  *      $_ARCHON->db->Login
  *      $_ARCHON->db->Password
  *      $_ARCHON->db->Database
@@ -79,6 +80,27 @@
    //
 
    $_ARCHON->db->ServerAddress = 'localhost';
+
+   // ### REQUIRED ###
+   // ********************************************
+   // * $_ARCHON->db->ServerPort                 *
+   // ********************************************
+   //
+   //   - Explanation:
+   //		Contains an integer designating the
+   //		network port for connections to the database.
+   //		MySQL defaults to 3306.
+   //		MSSQL defaults to 1433.
+   //
+   //   - Allowed Values:
+   //       Any integer between 1 and 65,536, corresponding
+   //		to the port your database server runs on.
+   //
+   //   - Example:
+   //       $_ARCHON->db->ServerAddress = 3306;
+
+   $_ARCHON->db->ServerPort = 3306;
+
 
    // ### REQUIRED ###
    // ********************************************

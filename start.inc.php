@@ -32,7 +32,7 @@ if(file_exists('packages/core/install/install.php') && $arrP[0] != 'admin' && $_
 $_ARCHON->DefaultOBLevel = ob_get_level();
 
 if($_FILES)
-{   
+{
    $_FILES = array_change_key_case_recursive($_FILES);
 }
 
@@ -63,46 +63,82 @@ if($_ARCHON->db->ServerType == 'MSSQL')
    ini_set("mssql.textlimit", 2147483647);
 }
 
-$phpservertype = strtolower($_ARCHON->db->ServerType);
-$dbdsn = $phpservertype."://".$_ARCHON->db->Login.":".$_ARCHON->db->Password."@".$_ARCHON->db->ServerAddress."/".$_ARCHON->db->DatabaseName;
+// Build the database data source name (DSN).
+$dbdsn = strtolower($_ARCHON->db->ServerType).":";
+$dbdsn .= "host=".$_ARCHON->db->ServerAddress.";";
+$dbdsn .= "port=".$_ARCHON->db->ServerPort.";";
+$dbdsn .= "dbname=".$_ARCHON->db->DatabaseName.";";
+$dbdsn .= "charset=utf8";
 
-// MDB2 with MySQLi seems to require this encoding to handle UTF8 characters in Archon's tables.
-if($_ARCHON->db->ServerType == 'MySQL')
-{
-   $dbdsn .= "?CharSet=utf8";
+// Build an array of default connection options for the database connection.
+$dboptions = array(
+	PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // Failed database calls throw PHP exceptions
+	PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, // Results returned in associative arrays
+);
+
+// Allow MySQL to handle very large requests.
+if($_ARCHON->db->ServerType == 'MYSQL'){
+	$dboptions[PDO::MYSQL_ATTR_INIT_COMMAND] = "SET max_allowed_packet=1073741824";
 }
 
-$_ARCHON->QueryLog = New QueryLog();
+//I don't think PDO offers a way to redirect DB errors to a log
+//like this.  Maybe something with a PHP-wide set handler?
+//$_ARCHON->QueryLog = New QueryLog();
 
-$dboptions = array('debug' => 1, 'debug_handler' => array($_ARCHON->QueryLog, 'logQuery'), 'portability' => MDB2_PORTABILITY_ALL ^ MDB2_PORTABILITY_FIX_CASE);
+try {
+	$db = new PDO (
+		$dbdsn,
+		$_ARCHON->db->Login,
+		$_ARCHON->db->Password,
+		$dboptions
+	);
 
-$mdb2 = MDB2::connect($dbdsn, $dboptions);
+	// Older versions of PHP do not properly set the character set based
+	// on the DSN when using MySQL.  If running on one of these very old
+	// versions, we need to set the encoding for the database connection
+	// manually.  Any PHP from 5.36 forward does not need this.
+	if (version_compare(PHP_VERSION, '5.3.6', '<') && $_ARCHON->db->ServerType == 'MYSQL') {
+    	$db->query("SET NAMES UTF8");
+	}
 
-if (pear_isError($mdb2))
-{
-   echo("Error connecting to database!<br />\n");
-   trigger_error($mdb2->getMessage(), E_USER_ERROR);
+
+	$_ARCHON->pdo = $db;
+} catch(PDOException $e) {
+
+	$SQLerror = "Could not connect with database.\n";
+
+	if(!defined('PDO::ATTR_DRIVER_NAME'))
+	{
+		$SQLerror .= "Your PHP does not have PDO installed.\n";
+	}
+
+	if(!extension_loaded('pdo_mysql') && $_ARCHON->db->ServerType === 'MYSQL')
+	{
+		$SQLerror .= "Your PHP does not have the MySQL driver for PDO installed.\n";
+	}
+
+	if(!extension_loaded('pdo_dblib') && $_ARCHON->db->ServerType === 'MSSQL')
+	{
+		$SQLerror .= "Your PHP does not have the MSSQL driver for PDO installed.\n";
+	}
+
+	$debug = false;
+
+	if(error_reporting() === E_ALL){ $debug = true; }
+	if(error_reporting() === (E_ALL ^ E_NOTICE)){ $debug = true; }
+
+	if($debug){
+		$SQLerror .= "The full error is:\n $error";
+	} else {
+		$SQLerror .= 'For further details enable debug mode in includes.inc.php.';
+	}
+
+	header('Content-Type: text/plain');
+	print $SQLerror;
+	exit;
 }
 
-$_ARCHON->mdb2 =& $mdb2;
-$_ARCHON->mdb2->setFetchMode(MDB2_FETCHMODE_ASSOC);
-
-if($_ARCHON->db->ServerType == 'MySQL' || $_ARCHON->db->ServerType == 'MySQLi')
-{
-   // this makes sure the encoding for the queries is expected
-   $query = "SET NAMES 'utf8'";
-   $affected = $_ARCHON->mdb2->exec($query);
-   if (pear_isError($affected))
-   {
-      trigger_error($affected->getMessage(), E_USER_ERROR);
-   }
-
-   // This might fail.
-   $query = "SET max_allowed_packet=1073741824";
-   $affected = $_ARCHON->mdb2->exec($query);
-}
-
-if($_ARCHON->mdb2)
+if($_ARCHON->pdo)
 {
    if($_REQUEST['p'] != 'install' && $_REQUEST['p'] != 'upgrade')
    {

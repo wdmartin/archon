@@ -11,7 +11,7 @@
  * @authors Chris Rishel, Kyle Fox, Paul Sorensen
  */
 // fix for PHP versions before 5.2
-if ( !function_exists('sys_get_temp_dir')) 
+if ( !function_exists('sys_get_temp_dir'))
 {
   function sys_get_temp_dir() {
     if($temp=getenv('TMP')) return $temp;
